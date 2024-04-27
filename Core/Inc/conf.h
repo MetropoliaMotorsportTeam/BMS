@@ -137,6 +137,7 @@ typedef struct status_data_t
 	uint32_t limping;
 	uint8_t recieved_IVT;
 	uint32_t limp_counters[10]; //this 10 shouldn't be hardcoded here but it is now
+	uint8_t charge;
 }status_data_t;
 
 //////////////////////////////////////////////////////////////////////
@@ -148,7 +149,7 @@ typedef struct status_data_t
 #define CAN_IVT_U1 0x522
 #define CAN_IVT_U2 0x523
 #define CAN_IVT_Wh 0x528
-#define CAN_LIMP 0x96
+#define CAN_CHARGE 0x96
 #define CAN_SOC 0x97
 
 
@@ -157,25 +158,11 @@ typedef struct status_data_t
 	debug functionality enable/disable
  */
 #define IVT							1
-#define CAN_DEBUG					1
 #define CAN_ENABLED					1
-#define FAN_DEBUG					0
-#define BMS_RELAY_CTRL_BYPASS		0
-#define STOP_CORE_ON_SAFE_STATE		0
-#define START_DEBUG_ON_SAFE_STATE	1
-#define BYPASS_INITIAL_CHECK		0
-#define SKIP_PEC_ERROR_ACTIONS		0
 #define ERROR_COUNT_LIMIT			2 //0 = shut down on first error
-#define ERROR_COUNT_LIMIT_LOST		1
-#define LIMP_COUNT_LIMIT			2
-/*!
-	Board connection definitions
- */
 
-#define PRE				J9_PIN4_5V
-#define AIR				J8_PIN4_5V
-#define FAN_24			J3_PIN1_24V
-//#define FAN_PWM			J3_PIN4_5V
+
+
 /*!
 	Test enable/disable
  */
@@ -206,10 +193,7 @@ typedef struct status_data_t
 #define IVT_LOST				10
 #define OVERTEMP_CHARGING		11
 
-/* Bit definitions in NLG5 Control Bitmap (NLG5_CTLB) */
-#define NLG5_C_C_EN				(1<<7)
-#define NLG5_C_C_EL				(1<<6)
-#define NLG5_C_CP_V				(1<<5)
+
 //////////////////////////////////////////////////////////////////////
 
 #define BATTERY_CAPACITY 13000 //13Ah

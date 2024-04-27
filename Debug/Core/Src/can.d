@@ -31,7 +31,7 @@ Core/Src/can.o: ../Core/Src/can.c \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim_ex.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h \
- ../Core/Inc/conf.h
+ ../Core/Inc/conf.h ../Core/Inc/operation.h ../Core/Inc/conf.h
 ../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h:
 ../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h:
 ../Drivers/CMSIS/Include/core_cm4.h:
@@ -64,4 +64,6 @@ Core/Src/can.o: ../Core/Src/can.c \
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim_ex.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h:
+../Core/Inc/conf.h:
+../Core/Inc/operation.h:
 ../Core/Inc/conf.h:

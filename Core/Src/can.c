@@ -8,14 +8,59 @@
 
 #include "stm32g4xx.h"
 #include "conf.h"
+#include "operation.h"
+#include "stm32g4xx_hal_fdcan.h"
 
 
 extern FDCAN_HandleTypeDef hfdcan1;
 extern FDCAN_TxHeaderTypeDef TxHeader;
 extern FDCAN_RxHeaderTypeDef RxHeader;
+extern uint8_t RxData[8];
+extern status_data_t status_data;
 
-uint8_t nlg5a_buffer[4];
-uint8_t nlg5b_buffer[4];
+void HAL_FDCAN_RxFifo0Callback(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo0ITs)
+{
+
+	 if((RxFifo0ITs & FDCAN_IT_RX_FIFO0_NEW_MESSAGE) != RESET)
+	  {
+	    /* Retreive Rx messages from RX FIFO0 */
+	    if (HAL_FDCAN_GetRxMessage(hfdcan, FDCAN_RX_FIFO0, &RxHeader, RxData) != HAL_OK)
+	    {
+	    /* Reception Error */
+	    Error_Handler();
+	    }
+	    else{
+	    	uint32_t rxdata = (uint32_t)(RxData[5] | (RxData[4] << 8) | (RxData[3] << 16) | (RxData[2] << 24) );
+
+	    	  switch(RxHeader.Identifier){
+
+	    	  	  case(CAN_IVT_U1): //IVT U1
+	    				  status_data.recieved_IVT = 1;
+	    				  status_data.IVT_U1 = rxdata / 1000.0f;
+	    	  			  break;
+	    	  	  case(CAN_IVT_U2): //IVT U2
+	    				  status_data.recieved_IVT = 1;
+	    	  			  status_data.IVT_U2_f = rxdata / 1000.0f;
+	    		  	  	  break;
+	    	  	  case(CAN_IVT_Wh): //IVT Wh
+	    				  status_data.recieved_IVT = 1;
+	    	  			  status_data.IVT_Wh_f = rxdata / 1000.0f;
+	    	  			  break;
+	    	  	  case(CAN_IVT_I): //IVT I
+	    				  status_data.recieved_IVT = 1;
+	    	  			  status_data.IVT_I_f = rxdata / 1000.0f;
+	    	  			  break;
+	    	  	  case(CAN_CHARGE):
+	    	  			  status_data.mode = 2;
+	    	  }
+	    }
+	    if (HAL_FDCAN_ActivateNotification(hfdcan, FDCAN_IT_RX_FIFO0_NEW_MESSAGE, 0) != HAL_OK)
+	    {
+	      /* Notification Error */
+	      Error_Handler();
+	    }
+	  }
+}
 
 
 
@@ -63,30 +108,6 @@ void CanSend(uint8_t *TxData, uint32_t identifier ){
 	}
 
 }
-
-int ReadCANBusMessage(uint32_t messageIdentifier, uint8_t* RxData1)
-{
-    /* Infinite loop to keep trying to read the message */
-	uint32_t t = 0;
-
-    while(t < 4294967295)
-    {
-    	t++;
-        /* Check if a new message is available in RX FIFO 0 */
-        if(HAL_FDCAN_GetRxMessage(&hfdcan1, FDCAN_RX_FIFO0, &RxHeader, RxData1) == HAL_OK)
-        {
-            /* Validate the Identifier */
-            if(RxHeader.Identifier == messageIdentifier)
-            {
-                return 0; // Message successfully read and validated
-            }
-            delay_u(10);
-        }
-        // Else, ignore the error and try again
-    }
-    return 1;
-}
-
 
 
 void Send_cell_data(cell_data_t cell_data[][CELL_NUM]){
