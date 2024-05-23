@@ -29,28 +29,28 @@ uint8_t nlg5b_buffer[4];
 uint8_t canSendErrorFlag;
 
 void read_IVT_I(){
-	status_data.recieved_IVT = 0;
+	status_data.recieved_IVT = 1;
 
 	status_data.IVT_I = (uint32_t)(CAN_RxData[5] | (CAN_RxData[4] << 8) | (CAN_RxData[3] << 16) | (CAN_RxData[2] << 24) );
 	status_data.IVT_I_f = status_data.IVT_I / 1000.0f;
 }
 
 void read_IVT_U1(){
-	status_data.recieved_IVT = 0;
+	status_data.recieved_IVT = 1;
 
 	status_data.IVT_U1 = (uint32_t)(CAN_RxData[5] | (CAN_RxData[4] << 8) | (CAN_RxData[3] << 16) | (CAN_RxData[2] << 24) );
 	status_data.IVT_U1_f = status_data.IVT_U1 / 1000.0f;
 }
 
 void read_IVT_U2(){
-	status_data.recieved_IVT = 0;
+	status_data.recieved_IVT = 1;
 
 	status_data.IVT_U2 = (uint32_t)(CAN_RxData[5] | (CAN_RxData[4] << 8) | (CAN_RxData[3] << 16) | (CAN_RxData[2] << 24) );
 	status_data.IVT_U2_f = status_data.IVT_U2 / 1000.0f;
 }
 
 void read_IVT_Wh(){
-	status_data.recieved_IVT = 0;
+	status_data.recieved_IVT = 1;
 
 	status_data.IVT_Wh = (uint32_t)(CAN_RxData[5] | (CAN_RxData[4] << 8) | (CAN_RxData[3] << 16) | (CAN_RxData[2] << 24) );
 	status_data.IVT_Wh_f = status_data.IVT_Wh / 1000.0f;

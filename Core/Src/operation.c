@@ -155,6 +155,7 @@ int AMS_OK(status_data_t *status_data, limit_t *limit){
 		if(status_data->min_temp > limit->min_temp && status_data->max_temp < limit->max_temp){
 			if(status_data->recieved_IVT){
 				close_AIR();
+				status_data->recieved_IVT = 0;
 				return 0;
 			}
 		}

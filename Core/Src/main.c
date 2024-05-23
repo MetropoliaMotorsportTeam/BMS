@@ -115,16 +115,6 @@ int main(void)
   MX_FDCAN1_Init();
   /* USER CODE BEGIN 2 */
 
-  if(HAL_FDCAN_Start(&hfdcan1)!= HAL_OK)
-    {
-  	  Error_Handler();
-    }
-
-  if (HAL_FDCAN_ActivateNotification(&hfdcan1, FDCAN_IT_RX_FIFO0_NEW_MESSAGE, 0) != HAL_OK)
-    {
-      /* Notification Error */
-      Error_Handler();
-    }
 
   HAL_TIMEx_PWMN_Start(&htim8, TIM_CHANNEL_3);
   uint16_t pulse = 0;
