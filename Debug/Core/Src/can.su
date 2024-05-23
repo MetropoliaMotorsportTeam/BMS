@@ -8,3 +8,4 @@
 ../Core/Src/can.c:140:6:Send_cell_data	48	static
 ../Core/Src/can.c:168:6:Send_temp_data	88	static
 ../Core/Src/can.c:297:6:Send_Soc	32	static
+../Core/Src/can.c:325:6:Send_Min	32	static

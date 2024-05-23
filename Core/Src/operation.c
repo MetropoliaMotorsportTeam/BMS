@@ -229,7 +229,6 @@ void core_routine(int32_t retest){
 	set_fan_duty_cycle(&status_data);
 
 #if IVT
-
 	calculate_soc(&status_data);
 	precharge_compare();
 	calculate_soc(&status_data);
@@ -240,6 +239,7 @@ void core_routine(int32_t retest){
 	Send_cell_data(cell_data);
 	Send_temp_data(temp_data);
 	Send_Soc(&status_data);
+	Send_Min(&status_data);
 	test_limp(&status_data, &limits);
 #endif
 

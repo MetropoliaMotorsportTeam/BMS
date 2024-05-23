@@ -322,4 +322,28 @@ void Send_Soc(status_data_t *status_data){
 
 }
 
+void Send_Min(status_data_t *status_data){
+	uint8_t Tx_Data[8];
+
+	uint16_t buf = status_data->min_voltage / 10;
+	uint8_t c1 = buf;
+	uint8_t c2 = buf >> 8;
+	Tx_Data[0] = c1;
+	Tx_Data[1] = c2;
+
+	uint16_t buf2 = (uint16_t)status_data->max_temp;
+
+	Tx_Data[2]= (uint8_t)(buf2);
+	Tx_Data[3]= (uint8_t)(buf2 >> 8);
+
+	Tx_Data[4]= 0;
+	Tx_Data[5]= 0;
+	Tx_Data[6]= 0;
+	Tx_Data[7]= 0;
+
+
+	CanSend(Tx_Data, CAN_MIN);
+
+}
+
 

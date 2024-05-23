@@ -22,4 +22,6 @@ void Send_temp_data(temp_data_t temp_data[][GPIO_NUM]);
 
 void Send_Soc(status_data_t *status_data);
 
+void Send_Min(status_data_t *status_data);
+
 #endif /* INC_CAN_H_ */
