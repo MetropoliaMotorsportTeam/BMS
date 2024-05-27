@@ -98,7 +98,6 @@ typedef struct status_data_t
 
 	uint8_t opmode;
 
-
 	bool safe_state_executed;
 	uint8_t reason_code;
 
@@ -141,22 +140,5 @@ typedef struct status_data_t
 #define IVT							1
 #define CAN_ENABLED					1
 #define ERROR_COUNT_LIMIT			2 //0 = shut down on first error
-
-
-/*!
-	Reason codes for entering safe-state
- */
-#define UNDEFINED				0
-#define OVERVOLTAGE				1
-#define UNDERVOLTAGE			2
-#define OVERTEMP				3
-#define UNDERTEMP				4
-#define OVERCURR				5
-#define OVERPOWER				6
-#define EXTERNAL				7
-#define PEC_ERROR				8
-#define ACCU_UNDERVOLTAGE		9
-#define IVT_LOST				10
-#define OVERTEMP_CHARGING		11
 
 #endif /* INC_CONF_H_ */

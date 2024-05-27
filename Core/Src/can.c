@@ -8,6 +8,8 @@
 
 #include "stm32g4xx.h"
 #include "conf.h"
+#include "isoSpi.h"
+#include "main.h"
 
 
 extern FDCAN_HandleTypeDef hfdcan1;
