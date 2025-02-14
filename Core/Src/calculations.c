@@ -29,10 +29,11 @@ void calc_sum_of_cells(uint8_t total_ic, cell_data_t cell_data[][CELL_NUM], stat
 float roundToTwoDecimal(float num) {
     return round(num * 100) / 100.0;
 }
+float round_to_nearest_five_cents(float num) {
+    return round(num * 20) / 20.0;
+}
 
-void OCV_soc(status_data_t *status_data) {
-
-    float OCV[][2] = {
+float OCV[][2] = {
         {3.00, 0},
         {3.05, 5},
         {3.10, 10},
@@ -56,9 +57,15 @@ void OCV_soc(status_data_t *status_data) {
         {4.20, 100}
     };
 
+void OCV_soc(status_data_t *status_data) {
+
+
+
 
     float voltage = roundToTwoDecimal(status_data->IVT_U3_f);
-
+    float rounded = round_to_nearest_five_cents(voltage);
+    int OCV_row = (rounded - 3)/0.05;
+    status_data->soc = OCV[OCV_row][1];
 
     for (int i = 0; i < 19; ++i) {
         if (voltage >= OCV[i][0] && voltage < OCV[i+1][0]) {
