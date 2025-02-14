@@ -67,13 +67,6 @@ void OCV_soc(status_data_t *status_data) {
     int OCV_row = (rounded - 3)/0.05;
     status_data->soc = OCV[OCV_row][1];
 
-    for (int i = 0; i < 19; ++i) {
-        if (voltage >= OCV[i][0] && voltage < OCV[i+1][0]) {
-            status_data->soc = OCV[i][1];
-
-            break;
-        }
-    }
 }
 
 
