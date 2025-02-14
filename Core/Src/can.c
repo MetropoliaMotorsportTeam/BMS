@@ -51,6 +51,13 @@ void read_IVT_U2(){
 	status_data.IVT_U2_f = status_data.IVT_U2 / 1000.0f;
 }
 
+void read_IVT_U3(){
+	status_data.recieved_IVT = 1;
+
+	status_data.IVT_U3 = (uint32_t)(CAN_RxData[5] | (CAN_RxData[4] << 8) | (CAN_RxData[3] << 16) | (CAN_RxData[2] << 24) );
+	status_data.IVT_U3_f = status_data.IVT_U3 / 1000.0f;
+}
+
 void read_IVT_Wh(){
 	status_data.recieved_IVT = 1;
 
@@ -58,7 +65,12 @@ void read_IVT_Wh(){
 	status_data.IVT_Wh_f = status_data.IVT_Wh / 1000.0f;
 }
 
+void read_IVT_As(){
+	status_data.recieved_IVT = 1;
 
+	status_data.IVT_As = (uint32_t)(CAN_RxData[5] | (CAN_RxData[4] << 8) | (CAN_RxData[3] << 16) | (CAN_RxData[2] << 24) );
+	status_data.IVT_As_f = status_data.IVT_As / 1000.0f;
+}
 
 
 
@@ -83,10 +95,15 @@ void HAL_FDCAN_RxFifo0Callback(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo0ITs)
 		case CAN_IVT_U2:
 			read_IVT_U2();
 			break;
+		case CAN_IVT_U3:
+			read_IVT_U3();
+			break;
 		case CAN_IVT_Wh:
 			read_IVT_Wh();
 			break;
-
+		case CAN_IVT_As:
+			read_IVT_As();
+			break;
 	
 
     	}

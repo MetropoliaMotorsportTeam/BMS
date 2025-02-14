@@ -344,7 +344,7 @@ uint8_t read_cell_voltage(void){
 		}
 		else increase_pec_counter();
 	}
-	goto_safe_state(PEC_ERROR);
+	goto_safe_state(0);
 	return -1;
 
 }
@@ -371,7 +371,7 @@ uint8_t read_temp_measurement(void){
 				increase_pec_counter();
 			}
 		}
-		goto_safe_state(PEC_ERROR);
+		goto_safe_state(0);
 		return -1;
 
 }

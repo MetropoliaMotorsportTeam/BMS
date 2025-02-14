@@ -26,12 +26,74 @@ void calc_sum_of_cells(uint8_t total_ic, cell_data_t cell_data[][CELL_NUM], stat
 /*!
 	\brief	Calculate power from current data and Sum of Cells.
 */
+float roundToTwoDecimal(float num) {
+    return round(num * 100) / 100.0;
+}
 
-void calculate_soc(status_data_t *status_data){
+void OCV_soc(status_data_t *status_data) {
+
+    float OCV[][2] = {
+        {3.00, 0},
+        {3.05, 5},
+        {3.10, 10},
+        {3.15, 15},
+        {3.20, 20},
+        {3.30, 25},
+        {3.40, 30},
+        {3.45, 35},
+        {3.50, 40},
+        {3.45, 45},
+        {3.60, 50},
+        {3.65, 55},
+        {3.70, 60},
+        {3.75, 65},
+        {3.80, 70},
+        {3.90, 75},
+        {4.00, 80},
+        {4.05, 85},
+        {4.10, 90},
+        {4.15, 95},
+        {4.20, 100}
+    };
+
+
+    float voltage = roundToTwoDecimal(status_data->IVT_U3_f);
+
+
+    for (int i = 0; i < 19; ++i) {
+        if (voltage >= OCV[i][0] && voltage < OCV[i+1][0]) {
+            status_data->soc = OCV[i][1];
+
+            break;
+        }
+    }
+}
+
+
+void coulumb_soc(status_data_t *status_data){
 
 	//float consumed = status_data->IVT_I * FREQUENCY/3600;
 
-	status_data->soc = 100 - (status_data->IVT_Wh / ACCU_Wh)*100;
+	//status_data->soc = 100 - (status_data->IVT_Wh / ACCU_Wh)*100;
+
+	float used_Ah = status_data->IVT_As_f/3600;
+	status_data->soc = status_data->soc + (used_Ah/13227.513)*100;
+	//status_data->soc_init = status_data->soc;
+	//8kWh 604.8V, 13227.513mAh
+}
+
+
+void calculate_soc(status_data_t *status_data){
+
+	if (status_data->pre_s == true) {
+
+		coulumb_soc(status_data);
+
+	} else {
+
+		OCV_soc(status_data);
+
+	}
 
 }
 /*!
