@@ -6,6 +6,7 @@
  */
 #include "conf.h"
 #include "calculations.h"
+#include <math.h>
 /*!
 	\brief	Calculates the Sum of Cells.
 */
@@ -26,51 +27,72 @@ void calc_sum_of_cells(uint8_t total_ic, cell_data_t cell_data[][CELL_NUM], stat
 /*!
 	\brief	Calculate power from current data and Sum of Cells.
 */
-float roundToTwoDecimal(float num) {
+
+/*float roundToTwoDecimal(float num) {
     return round(num * 100) / 100.0;
 }
 float round_to_nearest_five_cents(float num) {
     return round(num * 20) / 20.0;
-}
+}*/
 
 float OCV[][2] = {
-        {3.00, 0},
-        {3.05, 5},
-        {3.10, 10},
-        {3.15, 15},
-        {3.20, 20},
-        {3.30, 25},
-        {3.40, 30},
-        {3.45, 35},
-        {3.50, 40},
-        {3.45, 45},
-        {3.60, 50},
-        {3.65, 55},
-        {3.70, 60},
-        {3.75, 65},
-        {3.80, 70},
-        {3.90, 75},
-        {4.00, 80},
-        {4.05, 85},
-        {4.10, 90},
-        {4.15, 95},
-        {4.20, 100}
+        {413, 0},//413,03592
+        {417, 5},//417,6472
+        {421, 10},//421,627
+        {424, 15},//424,2333
+        {427, 20},//427,0077
+        {430, 25},//430,5987
+        {434, 30},//434,7212
+        {438, 35},//438,8016
+        {442, 40},//442,88
+        {446, 45},//446,9306
+        {450, 50},//450,2152
+        {454, 55},//454,266
+        {458, 60},//458,2858
+        {462, 65},//462,3792
+        {466, 70},//466,8557
+        {472, 75},//472,9163
+        {482, 80},//482,0984
+        {491, 85},//491,1594
+        {499, 90},//499,7353
+        {508, 95},//508,1635
+        {597, 100}//597,6
     };
 
 void OCV_soc(status_data_t *status_data) {
 
 
+	int size = sizeof(OCV) / sizeof(OCV[0]);  // Dynamic array size
+
+	    if (status_data->IVT_U3_f < OCV[0][0]) {
+	        status_data->soc = OCV[0][1];  // 0%
+	    } else if (status_data->IVT_U3_f > OCV[size - 1][0]) {
+	        status_data->soc = OCV[size - 1][1];  // 100%
+	    } else {
+	        for (int i = 0; i < size - 1; i++) {
+	            if (status_data->IVT_U3_f >= OCV[i][0] && status_data->IVT_U3_f < OCV[i + 1][0]) {
+	                float V1 = OCV[i][0], SOC1 = OCV[i][1];
+	                float V2 = OCV[i + 1][0], SOC2 = OCV[i + 1][1];
+
+	                // Linear Interpolation
+	                status_data->soc = SOC1 + (status_data->IVT_U3_f - V1) * (SOC2 - SOC1) / (V2 - V1);
+	                status_data->soc = round(status_data->soc);
+	                break;
+	            }
+	        }
+	    }
 
 
-    float voltage = roundToTwoDecimal(status_data->IVT_U3_f);
+
+    /*float voltage = roundToTwoDecimal(status_data->IVT_U3_f);
     float rounded = round_to_nearest_five_cents(voltage);
     int OCV_row = (rounded - 3)/0.05;
-    status_data->soc = OCV[OCV_row][1];
+    status_data->soc = OCV[OCV_row][1];*/
 
 }
 
 
-void coulumb_soc(status_data_t *status_data){
+void coulomb_soc(status_data_t *status_data){
 
 	//float consumed = status_data->IVT_I * FREQUENCY/3600;
 
@@ -87,7 +109,7 @@ void calculate_soc(status_data_t *status_data){
 
 	if (status_data->pre_s == true) {
 
-		coulumb_soc(status_data);
+		coulomb_soc(status_data);
 
 	} else {
 
