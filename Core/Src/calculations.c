@@ -28,13 +28,6 @@ void calc_sum_of_cells(uint8_t total_ic, cell_data_t cell_data[][CELL_NUM], stat
 	\brief	Calculate power from current data and Sum of Cells.
 */
 
-/*float roundToTwoDecimal(float num) {
-    return round(num * 100) / 100.0;
-}
-float round_to_nearest_five_cents(float num) {
-    return round(num * 20) / 20.0;
-}*/
-
 float OCV[][2] = {
         {413, 0},//413,03592
         {417, 5},//417,6472
@@ -81,14 +74,6 @@ void OCV_soc(status_data_t *status_data) {
 	            }
 	        }
 	    }
-
-
-
-    /*float voltage = roundToTwoDecimal(status_data->IVT_U3_f);
-    float rounded = round_to_nearest_five_cents(voltage);
-    int OCV_row = (rounded - 3)/0.05;
-    status_data->soc = OCV[OCV_row][1];*/
-
 }
 
 
@@ -100,7 +85,6 @@ void coulomb_soc(status_data_t *status_data){
 
 	float used_Ah = status_data->IVT_As_f/3600;
 	status_data->soc = status_data->soc + (used_Ah/13227.513)*100;
-	//status_data->soc_init = status_data->soc;
 	//8kWh 604.8V, 13227.513mAh
 }
 

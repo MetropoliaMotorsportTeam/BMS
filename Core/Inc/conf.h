@@ -115,6 +115,7 @@ typedef struct status_data_t
 	float IVT_As_f;
 
 	float pre_percentage;
+	float pre_voltage_ratio;
 
 	uint32_t pec_error_counter;
 	uint32_t pec_error_counter_last;

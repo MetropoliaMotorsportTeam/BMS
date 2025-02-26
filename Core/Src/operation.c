@@ -191,7 +191,6 @@ void charge_routine(void){
 	#if IVT
 		calculate_soc(&status_data);
 		precharge_compare();
-		calculate_soc(&status_data);
 	#endif
 
 	#if CAN_ENABLED
@@ -252,13 +251,15 @@ void precharge_compare(void)
 
 //TODO
 
-	float percentage;
-	float pre = status_data.IVT_U1_f;
-	float air_p = status_data.IVT_U2_f;
-	percentage = (air_p * 100) / pre;
-	status_data.pre_percentage = percentage;
+	//float percentage;
+	//float pre = status_data.IVT_U1_f;
+	//float air_p = status_data.IVT_U2_f;
+	//percentage = (air_p * 100) / pre;
+	//status_data.pre_percentage = percentage;
+
+	status_data.pre_voltage_ratio = (status_data.IVT_U2_f * 100) / status_data.IVT_U1_f;
 	if (status_data.safe_state_executed == 0) {
-		if ((percentage >= 95) && (check_voltage_match() == true) && status_data.IVT_U1_f > limits.precharge_min_start_voltage) {
+		if ((status_data.pre_voltage_ratio >= 95) && (check_voltage_match() == true) && status_data.IVT_U1_f > limits.precharge_min_start_voltage) {
 			if(status_data.pre_s == false)
 			{
 				uint32_t starttick = HAL_GetTick();
@@ -280,16 +281,8 @@ void precharge_compare(void)
 
 int check_voltage_match(void)
 {
-	float percentage;
-	float accu_volt = (float)status_data.sum_of_cells;
-	float post_volt = (float)status_data.IVT_U2_f;
-	percentage = (post_volt * 100) / accu_volt;
-	percentage = percentage - 100;
-
-	if ((percentage < 10) && (percentage > -10)) {
-		return 1;
-	}
-	return 0;
+	float voltage_difference = ((status_data.IVT_U2_f * 100) / status_data.sum_of_cells) - 100;
+	return (voltage_difference > -10 && voltage_difference < 10);
 }
 
 /*!
