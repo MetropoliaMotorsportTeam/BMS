@@ -142,11 +142,18 @@ void close_AIR(void){
 void close_PRE(void){
 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, SET);
 	status_data.pre_s = true;
+
+	uint8_t tx[8] ={1, 0, 0, 0, 0, 0, 0, 0 };
+	CanSend(tx, CAN_PRE_DONE);
+
+
 }
 
 void open_PRE(void){
 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, RESET);
 	status_data.pre_s = false;
+	uint8_t tx[8] ={0, 0, 0, 0, 0, 0, 0, 0 };
+	CanSend(tx, CAN_PRE_DONE);
 
 }
 
@@ -344,7 +351,7 @@ uint8_t read_cell_voltage(void){
 		}
 		else increase_pec_counter();
 	}
-	goto_safe_state(PEC_ERROR);
+	goto_safe_state(0);
 	return -1;
 
 }
@@ -371,7 +378,7 @@ uint8_t read_temp_measurement(void){
 				increase_pec_counter();
 			}
 		}
-		goto_safe_state(PEC_ERROR);
+		goto_safe_state(0);
 		return -1;
 
 }

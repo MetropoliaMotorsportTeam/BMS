@@ -131,7 +131,7 @@ typedef struct status_data_t
 #define CAN_LIMP 0x96
 #define CAN_SOC 0x97
 #define CAN_MIN 0x98
-
+#define CAN_PRE_DONE 0x99
 
 /////////////////////////////////////////////////////////////////////
 /*!
