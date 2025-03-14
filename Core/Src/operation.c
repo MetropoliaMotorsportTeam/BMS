@@ -186,7 +186,7 @@ void charge_routine(void){
 		get_minmax_temperature(IC_NUM, temp_data, &status_data);
 		calc_sum_of_cells(IC_NUM, cell_data, &status_data);
 		AMS_OK(&status_data, &limits);
-		set_fan_duty_cycle(&status_data);
+		fan_pi_controller(&status_data);
 
 	#if IVT
 		calculate_soc(&status_data);
@@ -225,7 +225,7 @@ void core_routine(int32_t retest){
 	get_minmax_temperature(IC_NUM, temp_data, &status_data);
 	calc_sum_of_cells(IC_NUM, cell_data, &status_data);
 	AMS_OK(&status_data, &limits);
-	set_fan_duty_cycle(&status_data);
+	fan_pi_controller(&status_data);
 
 #if IVT
 	calculate_soc(&status_data);
@@ -251,11 +251,11 @@ void precharge_compare(void)
 
 //TODO
 
-	//float percentage;
-	//float pre = status_data.IVT_U1_f;
-	//float air_p = status_data.IVT_U2_f;
-	//percentage = (air_p * 100) / pre;
-	//status_data.pre_percentage = percentage;
+	/*float percentage;
+	float pre = status_data.IVT_U1_f;
+	float air_p = status_data.IVT_U2_f;
+	percentage = (air_p * 100) / pre;
+	status_data.pre_percentage = percentage;*/
 
 	status_data.pre_voltage_ratio = (status_data.IVT_U2_f * 100) / status_data.IVT_U1_f;
 	if (status_data.safe_state_executed == 0) {
