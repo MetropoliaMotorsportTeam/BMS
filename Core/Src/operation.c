@@ -142,12 +142,17 @@ void close_AIR(void){
 void close_PRE(void){
 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, SET);
 	status_data.pre_s = true;
+
+	uint8_t tx[8]={1, 0, 0, 0, 0, 0, 0, 0};
+	CanSend(tx, CAN_PRE_DONE);
 }
 
 void open_PRE(void){
 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, RESET);
 	status_data.pre_s = false;
 
+	uint8_t tx[8]={0, 0, 0, 0, 0, 0, 0, 0};
+	CanSend(tx, CAN_PRE_DONE);
 }
 
 int AMS_OK(status_data_t *status_data, limit_t *limit){

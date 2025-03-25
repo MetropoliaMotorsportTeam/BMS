@@ -19,7 +19,7 @@
 
 
 /**Target temperature*/
-#define TEMP_SETPOINT 39.0
+#define TEMP_SETPOINT 40
 //Proportional coefficient
 #define Kp  2.5
 //Integral coefficient
@@ -57,13 +57,22 @@ void set_fan_duty_cycle(status_data_t *status_data){
 static float integral = 0.0;
 
 void fan_pi_controller(status_data_t *status_data) {
-    float error = TEMP_SETPOINT - status_data->max_temp;  //temp error
+	float error = status_data->max_temp - TEMP_SETPOINT;  //temp error
+
+	//error = error < 0 ? 0 : error;
+
+	if (error < 0) {
+	   error = 0;
+	   integral *= 0.9;
+	} else {
+	   integral += error * DT;
+	}
 
     // integral
-    integral += error * DT;
+	//integral += error * DT;
 
     // calculating PI
-    float control_signal = (Kp * error) + (Ki * integral);
+    float control_signal = ((Kp * error) + (Ki * integral));
 
     // Limit PWM within acceptable range
     if (control_signal > MAX_PWM) control_signal = MAX_PWM;
@@ -71,4 +80,7 @@ void fan_pi_controller(status_data_t *status_data) {
 
     // fan speed
     __HAL_TIM_SET_COMPARE(&htim8, TIM_CHANNEL_3, (uint16_t)control_signal);
+    uint8_t pwm_tx[8] = {status_data->max_temp, (uint8_t)integral, (uint8_t)error, (uint8_t)control_signal, 0, 0, 0, 0};
+    //uint8_t pwm_tx[8] = {0, 0, 0, 0, 0, 0, 0, 0};
+    CanSend(pwm_tx, CAN_PWM_DATA);
 }
