@@ -32,7 +32,7 @@ status_data_t status_data;
 
 limit_t limits  = {
 	.max_voltage = 42000,
-	.min_voltage = 31000,
+	.min_voltage = 25000,
 	.max_charge_temp = 4400,
 	.max_temp = 59,
 	.min_temp = 0,
