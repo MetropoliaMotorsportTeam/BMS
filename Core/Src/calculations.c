@@ -137,6 +137,7 @@ void build_disch_cfg(uint8_t total_ic, cell_data_t cell_data[][CELL_NUM], uint8_
 	//discharge all cells
 
 	for (uint8_t i = 0; i < total_ic; i++){
+		DCCx = 0x0000;
 		for (uint8_t j = 0; j < 12; j++){
 			if (cell_data[i][j].voltage > (status_data->min_voltage + limit->tolerance)){
 				DCCx |= (1<<j);
@@ -148,6 +149,7 @@ void build_disch_cfg(uint8_t total_ic, cell_data_t cell_data[][CELL_NUM], uint8_
 		tx_config[i][4] = (DCCx & 0x00ff);
 		tx_config[i][5] = ((DCCx >> 8) & 0x0f);
 	}
+
 
 }
 

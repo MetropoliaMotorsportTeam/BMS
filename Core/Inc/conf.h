@@ -18,9 +18,9 @@
 #define CS_PIN 4
 #define CS_PIN_TYPE GPIOA
 
-#define CELL_NUM 18	// Number of cells in one stack
-#define IC_NUM 8 // Length of a daisy chain
-#define GPIO_NUM 12 //GPIO + Vref
+#define CELL_NUM 12	// Number of cells in one stack
+#define IC_NUM 2 // Length of a daisy chain
+#define GPIO_NUM 6 //GPIO + Vref
 
 #define SPI_TIMEOUT 15000
 
@@ -137,8 +137,8 @@ typedef struct status_data_t
 /*!
 	debug functionality enable/disable
  */
-#define IVT							1
-#define CAN_ENABLED					1
+#define IVT							0
+#define CAN_ENABLED					0
 #define ERROR_COUNT_LIMIT			2 //0 = shut down on first error
 
 #endif /* INC_CONF_H_ */

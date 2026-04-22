@@ -1,6 +1,6 @@
 ################################################################################
 # Automatically-generated file. Do not edit!
-# Toolchain: GNU Tools for STM32 (12.3.rel1)
+# Toolchain: GNU Tools for STM32 (13.3.rel1)
 ################################################################################
 
 -include ../makefile.init
@@ -52,6 +52,9 @@ default.size.stdout \
 OBJDUMP_LIST += \
 dev_bms.list \
 
+OBJCOPY_BIN += \
+dev_bms.bin \
+
 
 # All Target
 all: main-build
@@ -60,8 +63,8 @@ all: main-build
 main-build: dev_bms.elf secondary-outputs
 
 # Tool invocations
-dev_bms.elf dev_bms.map: $(OBJS) $(USER_OBJS) C:\Users\dovlatib\Documents\BMS\STM32G431KBTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "dev_bms.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\dovlatib\Documents\BMS\STM32G431KBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="dev_bms.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+dev_bms.elf dev_bms.map: $(OBJS) $(USER_OBJS) C:\Users\DovlatIbragimov\Documents\MetropoliaMotorsport\BMS\STM32G431KBTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "dev_bms.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\DovlatIbragimov\Documents\MetropoliaMotorsport\BMS\STM32G431KBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="dev_bms.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -75,12 +78,17 @@ dev_bms.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	@echo 'Finished building: $@'
 	@echo ' '
 
+dev_bms.bin: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objcopy  -O binary $(EXECUTABLES) "dev_bms.bin"
+	@echo 'Finished building: $@'
+	@echo ' '
+
 # Other Targets
 clean:
-	-$(RM) default.size.stdout dev_bms.elf dev_bms.list dev_bms.map
+	-$(RM) default.size.stdout dev_bms.bin dev_bms.elf dev_bms.list dev_bms.map
 	-@echo ' '
 
-secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST)
+secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST) $(OBJCOPY_BIN)
 
 fail-specified-linker-script-missing:
 	@echo 'Error: Cannot find the specified linker script. Check the linker settings in the build configuration.'

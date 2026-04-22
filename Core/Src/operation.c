@@ -37,7 +37,7 @@ limit_t limits  = {
 	.max_temp = 59,
 	.min_temp = 0,
 	.power = (8 * (10^6)),
-	.tolerance = 100,
+	.tolerance = 0,
 	.max_current = 180.0,
 	.accu_min_voltage = 450.0,
 	.precharge_min_start_voltage = 450.0,
@@ -61,7 +61,7 @@ void operation_main(void){
 		status_data.recieved_IVT = 0;
 
 
-		status_data.mode = 0;
+		status_data.mode = 1;
 
 		//Set Fans on
 		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, SET);
@@ -86,7 +86,7 @@ void operation_main(void){
 				calc_sum_of_cells(IC_NUM, cell_data, &status_data);
 				balance_routine();
 				status_data.uptime++;
-				HAL_Delay(1900);
+				HAL_Delay(10);
 
 				break;
 			case 2:
@@ -209,7 +209,7 @@ void charge_routine(void){
 		Send_Soc(&status_data);
 	#endif
 
-		balance_routine();
+		//balance_routine();
 		HAL_Delay(100);
 
 	}
@@ -309,10 +309,7 @@ int check_voltage_match(void)
 void balance_routine(void)
 {
 	build_disch_cfg(IC_NUM, cell_data, slave_cfg_tx, &status_data, &limits);
-	build_disch_cfgb(IC_NUM, cell_data, slave_cfgb_tx, &status_data, &limits);
-
 	cfg_slaves();
-
 }
 
 void empty_disch_cfg(void){
@@ -400,11 +397,8 @@ void init_slave_cfg(void)
 void cfg_slaves(void){
 	WakeUp();
 	wrcfg(IC_NUM, slave_cfg_tx);
-	WakeUp();
-	wrcfgb(IC_NUM, slave_cfgb_tx);
 	delay_u(500);
 	rdcfg(IC_NUM, slave_cfg_rx);
-	rdcfgb(IC_NUM, slave_cfgb_rx);
 }
 
 void increase_pec_counter(void)

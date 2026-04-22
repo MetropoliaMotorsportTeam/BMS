@@ -286,7 +286,7 @@ int8_t rdcfgb(uint8_t total_ic,
 
 uint8_t rdcv(uint8_t reg,				// Controls which cell voltage register is read back.
                      uint8_t total_ic,			// the number of ICs in the system
-                     cell_data_t cell_codes[][18]	// Array of the parsed cell codes
+                     cell_data_t cell_codes[][12]	// Array of the parsed cell codes //TODO fix
                     )
 {
 
@@ -310,7 +310,7 @@ uint8_t rdcv(uint8_t reg,				// Controls which cell voltage register is read bac
 
 	if (reg == 0)
 	{
-		for (uint8_t cell_reg = 1; cell_reg<7; cell_reg++)                    //executes once for each of the LTC6804 cell voltage registers/ LTC6813 changed cell_reg<5 to cell_reg<7
+		for (uint8_t cell_reg = 1; cell_reg<5; cell_reg++)                    //executes once for each of the LTC6811 cell voltage registers (A-D, 4 registers, 12 cells)
 		{
 			data_counter = 0;
 			rdcv_reg(cell_reg, total_ic,cell_data );				 //Reads a single Cell voltage register
@@ -461,7 +461,7 @@ int8_t rdaux(uint8_t reg,				//Determines which GPIO voltage register is read ba
 
 	if (reg == 0)
 	{
-		for (uint8_t gpio_reg = 1; gpio_reg<5; gpio_reg++)                //executes once for each of the LTC6804 aux voltage registers
+		for (uint8_t gpio_reg = 1; gpio_reg<3; gpio_reg++)                //executes once for each of the LTC6811 aux voltage registers (A-B only, 5 GPIOs + Vref2)
 		{
 			data_counter = 0;
 			rdaux_reg(gpio_reg, total_ic,data);                 //Reads the raw auxiliary register data into the data[] array

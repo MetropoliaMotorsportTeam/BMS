@@ -9,7 +9,7 @@
 ../Core/Src/LTC681x.c:234:8:rdcfgb	128	static
 ../Core/Src/LTC681x.c:387:6:rdcv_reg	24	static
 ../Core/Src/LTC681x.c:287:9:rdcv	192	static
-../Core/Src/LTC681x.c:568:1:adcv_delay	0	static
+../Core/Src/LTC681x.c:568:6:adcv_delay	0	static
 ../Core/Src/LTC681x.c:572:6:adax_delay	0	static
 ../Core/Src/LTC681x.c:580:6:rdaux_reg	24	static
 ../Core/Src/LTC681x.c:440:8:rdaux	136	static
