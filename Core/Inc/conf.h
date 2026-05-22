@@ -21,6 +21,7 @@
 #define CELL_NUM 12	// Number of cells in one stack
 #define IC_NUM 2 // Length of a daisy chain
 #define GPIO_NUM 6 //GPIO + Vref
+#define READ_AUX_TEMP_REG 0 // Set to 1 to enable extra temp channels (indices 6-9), requires GPIO_NUM 12
 
 #define SPI_TIMEOUT 15000
 

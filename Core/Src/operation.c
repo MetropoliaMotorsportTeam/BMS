@@ -37,7 +37,7 @@ limit_t limits  = {
 	.max_temp = 59,
 	.min_temp = 0,
 	.power = (8 * (10^6)),
-	.tolerance = 0,
+	.tolerance = 0, // Sets max voltage difference
 	.max_current = 180.0,
 	.accu_min_voltage = 450.0,
 	.precharge_min_start_voltage = 450.0,
@@ -61,7 +61,7 @@ void operation_main(void){
 		status_data.recieved_IVT = 0;
 
 
-		status_data.mode = 1;
+		status_data.mode = 1; // Operation mode. 0 - normal, 1 - balancing
 
 		//Set Fans on
 		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, SET);

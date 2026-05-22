@@ -26,19 +26,24 @@ void temp_calc(uint8_t total_ic,  temp_data_t temp_data[][GPIO_NUM]){
         }
     }
 
+#if READ_AUX_TEMP_REG
+    /* Extra temp channels for a second/extended LTC chip (indices 6-9).
+     * To re-enable: set READ_AUX_TEMP_REG 1 in conf.h and increase GPIO_NUM to 12. */
     for(int i = 0; i < total_ic; i++){
     	for(int j = 6; j < 10; j++){
-    		float Vs = (float)temp_data[i][5].raw / 10000; // Source voltage in volts Vref2
-    		v = (float)temp_data[i][j].raw / 10000; // Convert raw reading to volts
-    		r = (v * R1) / (Vs - v); // Calculate resistance of the thermistor
+    		float Vs = (float)temp_data[i][5].raw / 10000;
+    		v = (float)temp_data[i][j].raw / 10000;
+    		r = (v * R1) / (Vs - v);
     		t = log(r/R0);
     		t = t / B;
     		t = t + 1/T0;
     		t = 1/t;
-    		t -= 273.15; // Convert from Kelvin to Celsius
+    		t -= 273.15;
     		temp_data[i][j].temp = (int)t;
     	}
     }
+#endif
+
 }
 
 #endif
