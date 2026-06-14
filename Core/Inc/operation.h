@@ -10,7 +10,6 @@
 
 #include "conf.h"
 
-
 void operation_main(void);
 void core_routine(int32_t retest);
 void balance_routine(void);
@@ -27,7 +26,7 @@ uint8_t read_current_data(void);
 void goto_safe_state(uint8_t reason);
 void close_AIR(void);
 void open_AIR(void);
-void test_limp(status_data_t *status_data, limit_t *limit);
+void test_limp(status_data_t* status_data, limit_t* limit);
 void set_charge_current(void);
 void set_charger(void);
 void fan_energize(void);
@@ -40,5 +39,5 @@ void close_PRE(void);
 void open_PRE(void);
 int check_voltage_match(void);
 void increase_pec_counter(void);
-int AMS_OK(status_data_t *status_data, limit_t *limit);
+int AMS_OK(status_data_t* status_data, limit_t* limit);
 #endif /* INC_OPERATION_H_ */

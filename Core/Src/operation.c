@@ -28,21 +28,6 @@ uint8_t slave_cfgb_tx[IC_NUM][6];
 uint8_t slave_cfg_rx[IC_NUM][8];
 uint8_t slave_cfgb_rx[IC_NUM][8];
 
-status_data_t status_data;
-
-limit_t limits = {.max_voltage = 42000,
-                  .min_voltage = 25000,
-                  .max_charge_temp = 4400,
-                  .max_temp = 59,
-                  .min_temp = 0,
-                  .power = (8 * (10 ^ 6)),
-                  .tolerance = 0, // Sets max voltage difference
-                  .max_current = 180.0,
-                  .accu_min_voltage = 450.0,
-                  .precharge_min_start_voltage = 450.0,
-                  .precharge_max_end_voltage = 450.0,
-                  .limp_min_voltage = 34000};
-
 void operation_main(void)
 {
 
@@ -127,19 +112,19 @@ void operation_main(void)
 
 void open_AIR(void)
 {
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, RESET);
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, GPIO_PIN_RESET);
   status_data.air_s = false;
 }
 
 void close_AIR(void)
 {
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, SET);
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, GPIO_PIN_SET);
   status_data.air_s = true;
 }
 
 void close_PRE(void)
 {
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, SET);
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, GPIO_PIN_SET);
   status_data.pre_s = true;
 
   uint8_t tx[8] = {1, 0, 0, 0, 0, 0, 0, 0};
@@ -148,7 +133,7 @@ void close_PRE(void)
 
 void open_PRE(void)
 {
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, RESET);
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, GPIO_PIN_RESET);
   status_data.pre_s = false;
   uint8_t tx[8] = {0, 0, 0, 0, 0, 0, 0, 0};
   CanSend(tx, CAN_PRE_DONE);
