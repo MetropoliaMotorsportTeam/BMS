@@ -88,7 +88,7 @@ void HAL_FDCAN_RxFifo0Callback(FDCAN_HandleTypeDef* hfdcan, uint32_t RxFifo0ITs)
         break;
         // TODO: add config change function here
       case CAN_CHANGE_CONFIG:
-        Change_Config();
+        Change_Config(CAN_RxData);
         break;
 
       default:
