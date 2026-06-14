@@ -86,7 +86,6 @@ void HAL_FDCAN_RxFifo0Callback(FDCAN_HandleTypeDef* hfdcan, uint32_t RxFifo0ITs)
       case CAN_IVT_Wh:
         read_IVT_Wh();
         break;
-        // TODO: add config change function here
       case CAN_CHANGE_CONFIG:
         Change_Config(CAN_RxData);
         break;

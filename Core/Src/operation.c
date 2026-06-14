@@ -50,7 +50,6 @@ void operation_main(void)
 
   while (1)
   {
-    // TODO:switch state depending on CAN bus configuration
     switch (status_data.mode)
     {
     case 0:
@@ -235,9 +234,6 @@ void core_routine(int32_t retest)
 
 void precharge_compare(void)
 {
-
-  // TODO
-
   float percentage;
   float pre = status_data.IVT_U1_f;
   float air_p = status_data.IVT_U2_f;
