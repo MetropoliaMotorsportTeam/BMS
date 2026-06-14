@@ -8,10 +8,10 @@
 #ifndef SRC_PWM_H_
 #define SRC_PWM_H_
 
-
+#include "conf.h"
 
 void pwm_init(void);
-void set_fan_duty_cycle(status_data_t *status_data);
-void fan_control(status_data_t *status_data);
+void set_fan_duty_cycle(status_data_t* status_data);
+void fan_control(status_data_t* status_data);
 
 #endif /* SRC_PWM_H_ */
