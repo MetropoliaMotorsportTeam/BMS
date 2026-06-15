@@ -21,8 +21,9 @@
 #define CELL_NUM 12 // Number of cells in one stack
 #define IC_NUM 2    // Length of a daisy chain
 #define GPIO_NUM 6  // GPIO + Vref
-#define READ_AUX_TEMP_REG                                                                          \
-  0 // Set to 1 to enable extra temp channels (indices 6-9), requires GPIO_NUM 12
+
+// Set to 1 to enable extra temp channels (indices 6-9), requires GPIO_NUM 12
+#define READ_AUX_TEMP_REG 0
 
 #define SPI_TIMEOUT 15000
 
@@ -125,6 +126,7 @@ typedef struct status_data_t
 
 // TODO:check DBC file in ECU to use the remaining CAN ID
 #define CAN_CHANGE_CONFIG 0x21
+
 #define CAN_IVT_I 0x521
 #define CAN_IVT_U1 0x522
 #define CAN_IVT_U2 0x523
