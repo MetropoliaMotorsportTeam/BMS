@@ -124,9 +124,7 @@ typedef struct status_data_t
  *
  */
 
-// TODO:check DBC file in ECU to use the remaining CAN ID
-#define CAN_CHANGE_CONFIG 0x21
-
+#define CAN_CHANGE_CONFIG 0x76C
 #define CAN_IVT_I 0x521
 #define CAN_IVT_U1 0x522
 #define CAN_IVT_U2 0x523

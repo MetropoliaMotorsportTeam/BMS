@@ -87,9 +87,6 @@ void Config_4()
 
 void Change_Config(uint8_t CAN_RxData[])
 {
-  uint8_t data[8] = {100};
-  CanSend(data, 12);
-
   uint8_t config = DEFAULT_CONF;
   if (CAN_RxData)
     config = CAN_RxData[0];

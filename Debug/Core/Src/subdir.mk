@@ -8,6 +8,7 @@ C_SRCS += \
 ../Core/Src/LTC681x.c \
 ../Core/Src/calculations.c \
 ../Core/Src/can.c \
+../Core/Src/conf.c \
 ../Core/Src/isoSpi.c \
 ../Core/Src/main.c \
 ../Core/Src/operation.c \
@@ -23,6 +24,7 @@ OBJS += \
 ./Core/Src/LTC681x.o \
 ./Core/Src/calculations.o \
 ./Core/Src/can.o \
+./Core/Src/conf.o \
 ./Core/Src/isoSpi.o \
 ./Core/Src/main.o \
 ./Core/Src/operation.o \
@@ -38,6 +40,7 @@ C_DEPS += \
 ./Core/Src/LTC681x.d \
 ./Core/Src/calculations.d \
 ./Core/Src/can.d \
+./Core/Src/conf.d \
 ./Core/Src/isoSpi.d \
 ./Core/Src/main.d \
 ./Core/Src/operation.d \
@@ -57,7 +60,7 @@ Core/Src/%.o Core/Src/%.su Core/Src/%.cyclo: ../Core/Src/%.c Core/Src/subdir.mk
 clean: clean-Core-2f-Src
 
 clean-Core-2f-Src:
-	-$(RM) ./Core/Src/LTC681x.cyclo ./Core/Src/LTC681x.d ./Core/Src/LTC681x.o ./Core/Src/LTC681x.su ./Core/Src/calculations.cyclo ./Core/Src/calculations.d ./Core/Src/calculations.o ./Core/Src/calculations.su ./Core/Src/can.cyclo ./Core/Src/can.d ./Core/Src/can.o ./Core/Src/can.su ./Core/Src/isoSpi.cyclo ./Core/Src/isoSpi.d ./Core/Src/isoSpi.o ./Core/Src/isoSpi.su ./Core/Src/main.cyclo ./Core/Src/main.d ./Core/Src/main.o ./Core/Src/main.su ./Core/Src/operation.cyclo ./Core/Src/operation.d ./Core/Src/operation.o ./Core/Src/operation.su ./Core/Src/pwm.cyclo ./Core/Src/pwm.d ./Core/Src/pwm.o ./Core/Src/pwm.su ./Core/Src/stm32g4xx_hal_msp.cyclo ./Core/Src/stm32g4xx_hal_msp.d ./Core/Src/stm32g4xx_hal_msp.o ./Core/Src/stm32g4xx_hal_msp.su ./Core/Src/stm32g4xx_it.cyclo ./Core/Src/stm32g4xx_it.d ./Core/Src/stm32g4xx_it.o ./Core/Src/stm32g4xx_it.su ./Core/Src/syscalls.cyclo ./Core/Src/syscalls.d ./Core/Src/syscalls.o ./Core/Src/syscalls.su ./Core/Src/sysmem.cyclo ./Core/Src/sysmem.d ./Core/Src/sysmem.o ./Core/Src/sysmem.su ./Core/Src/system_stm32g4xx.cyclo ./Core/Src/system_stm32g4xx.d ./Core/Src/system_stm32g4xx.o ./Core/Src/system_stm32g4xx.su ./Core/Src/temp_calc.cyclo ./Core/Src/temp_calc.d ./Core/Src/temp_calc.o ./Core/Src/temp_calc.su
+	-$(RM) ./Core/Src/LTC681x.cyclo ./Core/Src/LTC681x.d ./Core/Src/LTC681x.o ./Core/Src/LTC681x.su ./Core/Src/calculations.cyclo ./Core/Src/calculations.d ./Core/Src/calculations.o ./Core/Src/calculations.su ./Core/Src/can.cyclo ./Core/Src/can.d ./Core/Src/can.o ./Core/Src/can.su ./Core/Src/conf.cyclo ./Core/Src/conf.d ./Core/Src/conf.o ./Core/Src/conf.su ./Core/Src/isoSpi.cyclo ./Core/Src/isoSpi.d ./Core/Src/isoSpi.o ./Core/Src/isoSpi.su ./Core/Src/main.cyclo ./Core/Src/main.d ./Core/Src/main.o ./Core/Src/main.su ./Core/Src/operation.cyclo ./Core/Src/operation.d ./Core/Src/operation.o ./Core/Src/operation.su ./Core/Src/pwm.cyclo ./Core/Src/pwm.d ./Core/Src/pwm.o ./Core/Src/pwm.su ./Core/Src/stm32g4xx_hal_msp.cyclo ./Core/Src/stm32g4xx_hal_msp.d ./Core/Src/stm32g4xx_hal_msp.o ./Core/Src/stm32g4xx_hal_msp.su ./Core/Src/stm32g4xx_it.cyclo ./Core/Src/stm32g4xx_it.d ./Core/Src/stm32g4xx_it.o ./Core/Src/stm32g4xx_it.su ./Core/Src/syscalls.cyclo ./Core/Src/syscalls.d ./Core/Src/syscalls.o ./Core/Src/syscalls.su ./Core/Src/sysmem.cyclo ./Core/Src/sysmem.d ./Core/Src/sysmem.o ./Core/Src/sysmem.su ./Core/Src/system_stm32g4xx.cyclo ./Core/Src/system_stm32g4xx.d ./Core/Src/system_stm32g4xx.o ./Core/Src/system_stm32g4xx.su ./Core/Src/temp_calc.cyclo ./Core/Src/temp_calc.d ./Core/Src/temp_calc.o ./Core/Src/temp_calc.su
 
 .PHONY: clean-Core-2f-Src
 

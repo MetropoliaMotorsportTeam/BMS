@@ -1,6 +1,7 @@
 "./Core/Src/LTC681x.o"
 "./Core/Src/calculations.o"
 "./Core/Src/can.o"
+"./Core/Src/conf.o"
 "./Core/Src/isoSpi.o"
 "./Core/Src/main.o"
 "./Core/Src/operation.o"

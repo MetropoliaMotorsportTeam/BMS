@@ -11,6 +11,7 @@
 #include "can.h"
 #include "conf.h"
 #include "isoSpi.h"
+#include "main.h"
 #include "pwm.h"
 #include "temp_calc.h"
 
@@ -50,6 +51,11 @@ void operation_main(void)
 
   while (1)
   {
+    // NOTE: remove once testing is done
+    HAL_GPIO_TogglePin(Led_debug_GPIO_Port, Led_debug_Pin);
+    uint8_t data[8] = {100};
+    CanSend(data, 0x12);
+
     switch (status_data.mode)
     {
     case 0:

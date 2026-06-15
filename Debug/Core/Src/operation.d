@@ -31,8 +31,9 @@ Core/Src/operation.o: ../Core/Src/operation.c ../Core/Inc/operation.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim_ex.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h \
- ../Core/Inc/conf.h ../Core/Inc/temp_calc.h ../Core/Inc/LTC681x.h \
- ../Core/Inc/LTC681x.h ../Core/Inc/calculations.h
+ ../Core/Inc/LTC681x.h ../Core/Inc/calculations.h ../Core/Inc/can.h \
+ ../Core/Inc/conf.h ../Core/Inc/isoSpi.h ../Core/Inc/main.h \
+ ../Core/Inc/pwm.h ../Core/Inc/temp_calc.h ../Core/Inc/LTC681x.h
 ../Core/Inc/operation.h:
 ../Core/Inc/conf.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h:
@@ -67,8 +68,12 @@ Core/Src/operation.o: ../Core/Src/operation.c ../Core/Inc/operation.h \
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim_ex.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h:
-../Core/Inc/conf.h:
-../Core/Inc/temp_calc.h:
-../Core/Inc/LTC681x.h:
 ../Core/Inc/LTC681x.h:
 ../Core/Inc/calculations.h:
+../Core/Inc/can.h:
+../Core/Inc/conf.h:
+../Core/Inc/isoSpi.h:
+../Core/Inc/main.h:
+../Core/Inc/pwm.h:
+../Core/Inc/temp_calc.h:
+../Core/Inc/LTC681x.h:
