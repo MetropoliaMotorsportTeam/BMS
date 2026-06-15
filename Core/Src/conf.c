@@ -19,6 +19,9 @@ limit_t limits = {.max_voltage = 42000,
 
 void Config_1()
 {
+  uint8_t data[8] = {0};
+  CanSend(data, 0x1);
+
   status_data.mode = 0;
   limits = (limit_t){.max_voltage = 30000,
                      .min_voltage = 25000,
@@ -36,6 +39,8 @@ void Config_1()
 
 void Config_2()
 {
+  uint8_t data[8] = {0};
+  CanSend(data, 0x2);
   status_data.mode = 1;
   limits = (limit_t){.max_voltage = 42000,
                      .min_voltage = 25000,
@@ -53,6 +58,8 @@ void Config_2()
 
 void Config_3()
 {
+  uint8_t data[8] = {0};
+  CanSend(data, 0x3);
   status_data.mode = 1;
   limits = (limit_t){.max_voltage = 42000,
                      .min_voltage = 25000,
@@ -70,6 +77,8 @@ void Config_3()
 
 void Config_4()
 {
+  uint8_t data[8] = {0};
+  CanSend(data, 0x4);
   status_data.mode = 1;
   limits = (limit_t){.max_voltage = 42000,
                      .min_voltage = 25000,
@@ -87,6 +96,7 @@ void Config_4()
 
 void Change_Config(uint8_t CAN_RxData[])
 {
+
   uint8_t config = DEFAULT_CONF;
   if (CAN_RxData)
     config = CAN_RxData[0];
@@ -109,4 +119,6 @@ void Change_Config(uint8_t CAN_RxData[])
   default:
     break;
   }
+  uint8_t data[8] = {100};
+  CanSend(data, 0x12);
 }

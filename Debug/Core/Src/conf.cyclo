@@ -1,5 +1,5 @@
 ../Core/Src/conf.c:20:6:Config_1	1
-../Core/Src/conf.c:37:6:Config_2	1
-../Core/Src/conf.c:54:6:Config_3	1
-../Core/Src/conf.c:71:6:Config_4	1
-../Core/Src/conf.c:88:6:Change_Config	6
+../Core/Src/conf.c:40:6:Config_2	1
+../Core/Src/conf.c:59:6:Config_3	1
+../Core/Src/conf.c:78:6:Config_4	1
+../Core/Src/conf.c:97:6:Change_Config	6
