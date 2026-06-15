@@ -19,6 +19,7 @@
 #define RETEST_NO 0
 
 uint8_t start_ivt[] = {0x34, 0x01, 0x1, 0x0, 0x0, 0x0, 0x0, 0x0};
+extern uint8_t test_msg;
 /*
   Memory allocation for large data arrays and structs
 */
@@ -38,6 +39,8 @@ void operation_main(void)
   initialize();
   init_slave_cfg();
 
+  load_config();
+
   status_data.pec_error_counter = 0;
   status_data.pec_error_counter_last = 0;
 
@@ -52,6 +55,7 @@ void operation_main(void)
   while (1)
   {
 
+    CanSend(&test_msg, 67);
     switch (status_data.mode)
     {
     case 0:

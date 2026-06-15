@@ -1,0 +1,2 @@
+../Core/Src/flash_conf.c:5:6:store_flash_memory	2
+../Core/Src/flash_conf.c:31:10:read_flash_memory	1

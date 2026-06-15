@@ -9,6 +9,7 @@
 
 #ifndef INC_CONF_H_
 #define INC_CONF_H_
+#include "flash_conf.h"
 #include "stdbool.h"
 #include "stm32g4xx_hal.h"
 #include <stdint.h>
@@ -142,11 +143,20 @@ typedef struct status_data_t
 #define CAN_ENABLED 0
 #define ERROR_COUNT_LIMIT 2 // 0 = shut down on first error
 
-void Config_1(void);
-void Config_2(void);
-void Config_3(void);
-void Config_4(void);
-void Change_Config(uint8_t*);
+#define NUM_CONF 4
+#define DEFAULT_CONF 1
+
+void config_1(void);
+void config_2(void);
+void config_3(void);
+void config_4(void);
+void apply_config(uint8_t);
+void save_config(uint8_t);
+static inline void load_config()
+{
+  uint8_t conf = read_flash_memory(CONFIG_FLASH_ADDR);
+  apply_config((conf > NUM_CONF || conf <= 0) ? DEFAULT_CONF : conf);
+}
 
 extern limit_t limits;
 extern status_data_t status_data;

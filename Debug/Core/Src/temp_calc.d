@@ -1,5 +1,5 @@
 Core/Src/temp_calc.o: ../Core/Src/temp_calc.c ../Core/Inc/temp_calc.h \
- ../Core/Inc/LTC681x.h ../Core/Inc/conf.h \
+ ../Core/Inc/LTC681x.h ../Core/Inc/conf.h ../Core/Inc/flash_conf.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h \
  ../Core/Inc/stm32g4xx_hal_conf.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h \
@@ -35,6 +35,7 @@ Core/Src/temp_calc.o: ../Core/Src/temp_calc.c ../Core/Inc/temp_calc.h \
 ../Core/Inc/temp_calc.h:
 ../Core/Inc/LTC681x.h:
 ../Core/Inc/conf.h:
+../Core/Inc/flash_conf.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h:
 ../Core/Inc/stm32g4xx_hal_conf.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h:

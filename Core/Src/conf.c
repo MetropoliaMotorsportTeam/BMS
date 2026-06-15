@@ -1,29 +1,19 @@
 #include "conf.h"
 #include "can.h"
+#include "flash_conf.h"
 
 status_data_t status_data = {0};
-#define DEFAULT_CONF 1
+limit_t limits = {0};
 
-limit_t limits = {.max_voltage = 42000,
-                  .min_voltage = 25000,
-                  .max_charge_temp = 4400,
-                  .max_temp = 59,
-                  .min_temp = 0,
-                  .power = (8 * (1e6)),
-                  .tolerance = 0, // Sets max voltage difference
-                  .max_current = 180.0,
-                  .accu_min_voltage = 450.0,
-                  .precharge_min_start_voltage = 450.0,
-                  .precharge_max_end_voltage = 450.0,
-                  .limp_min_voltage = 34000};
+uint8_t test_msg[8] = {0};
 
-void Config_1()
+void config_1()
 {
   uint8_t data[8] = {0};
   CanSend(data, 0x1);
 
   status_data.mode = 0;
-  limits = (limit_t){.max_voltage = 30000,
+  limits = (limit_t){.max_voltage = 42000,
                      .min_voltage = 25000,
                      .max_charge_temp = 4400,
                      .max_temp = 59,
@@ -37,7 +27,7 @@ void Config_1()
                      .limp_min_voltage = 34000};
 }
 
-void Config_2()
+void config_2()
 {
   uint8_t data[8] = {0};
   CanSend(data, 0x2);
@@ -56,7 +46,7 @@ void Config_2()
                      .limp_min_voltage = 34000};
 }
 
-void Config_3()
+void config_3()
 {
   uint8_t data[8] = {0};
   CanSend(data, 0x3);
@@ -75,7 +65,7 @@ void Config_3()
                      .limp_min_voltage = 34000};
 }
 
-void Config_4()
+void config_4()
 {
   uint8_t data[8] = {0};
   CanSend(data, 0x4);
@@ -94,31 +84,32 @@ void Config_4()
                      .limp_min_voltage = 34000};
 }
 
-void Change_Config(uint8_t CAN_RxData[])
+void save_config(uint8_t config)
 {
+  uint8_t conf = (config > NUM_CONF ? DEFAULT_CONF : config);
+  store_flash_memory(CONFIG_FLASH_ADDR, conf);
+  apply_config(config);
+}
 
-  uint8_t config = DEFAULT_CONF;
-  if (CAN_RxData)
-    config = CAN_RxData[0];
-
+void apply_config(uint8_t config)
+{
+  test_msg[0] = config;
   switch (config)
   {
   case 1:
-    Config_1();
+    config_1();
     break;
   case 2:
-    Config_2();
+    config_2();
     break;
   case 3:
-    Config_3();
+    config_3();
     break;
   case 4:
-    Config_4();
+    config_4();
     break;
-
   default:
     break;
   }
-  uint8_t data[8] = {100};
-  CanSend(data, 0x12);
+  CanSend(test_msg, 0x12);
 }

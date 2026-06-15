@@ -1,4 +1,5 @@
 Core/Src/pwm.o: ../Core/Src/pwm.c ../Core/Inc/conf.h \
+ ../Core/Inc/flash_conf.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h \
  ../Core/Inc/stm32g4xx_hal_conf.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h \
@@ -33,6 +34,7 @@ Core/Src/pwm.o: ../Core/Src/pwm.c ../Core/Inc/conf.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h \
  ../Core/Inc/pwm.h ../Core/Inc/conf.h
 ../Core/Inc/conf.h:
+../Core/Inc/flash_conf.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h:
 ../Core/Inc/stm32g4xx_hal_conf.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h:

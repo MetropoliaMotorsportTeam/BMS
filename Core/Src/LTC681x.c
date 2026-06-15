@@ -9,6 +9,7 @@
 #include "LTC681x.h"
 #include <stdint.h>
 #include "conf.h"
+#include "isoSpi.h"
 #include <stdlib.h>
 #define T_WAKE_MAX		400
 #define T_REFUP_MAX		4400

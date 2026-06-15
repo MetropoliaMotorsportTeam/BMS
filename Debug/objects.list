@@ -2,6 +2,7 @@
 "./Core/Src/calculations.o"
 "./Core/Src/can.o"
 "./Core/Src/conf.o"
+"./Core/Src/flash_conf.o"
 "./Core/Src/isoSpi.o"
 "./Core/Src/main.o"
 "./Core/Src/operation.o"
