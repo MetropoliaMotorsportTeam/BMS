@@ -105,7 +105,6 @@ void HAL_FDCAN_RxFifo0Callback(FDCAN_HandleTypeDef* hfdcan, uint32_t RxFifo0ITs)
 
 void CanSend(uint8_t* TxData, uint32_t identifier)
 {
-
   TxHeader.Identifier = identifier;
 
   while (HAL_FDCAN_GetTxFifoFreeLevel(&hfdcan1) != 0 &&

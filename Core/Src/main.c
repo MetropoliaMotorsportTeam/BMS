@@ -183,6 +183,15 @@ static void MX_FDCAN1_Init(void)
 {
 
   /* USER CODE BEGIN FDCAN1_Init 0 */
+  TxHeader.Identifier = 0x123;
+  TxHeader.IdType = FDCAN_STANDARD_ID;
+  TxHeader.TxFrameType = FDCAN_DATA_FRAME;
+  TxHeader.DataLength = FDCAN_DLC_BYTES_8;
+  TxHeader.ErrorStateIndicator = FDCAN_ESI_ACTIVE;
+  TxHeader.BitRateSwitch = FDCAN_BRS_OFF;
+  TxHeader.FDFormat = FDCAN_CLASSIC_CAN;
+  TxHeader.TxEventFifoControl = FDCAN_NO_TX_EVENTS;
+  TxHeader.MessageMarker = 0;
 
   /* USER CODE END FDCAN1_Init 0 */
 
@@ -202,8 +211,8 @@ static void MX_FDCAN1_Init(void)
   hfdcan1.Init.NominalTimeSeg2 = 2;
   hfdcan1.Init.DataPrescaler = 1;
   hfdcan1.Init.DataSyncJumpWidth = 1;
-  hfdcan1.Init.DataTimeSeg1 = 1;
-  hfdcan1.Init.DataTimeSeg2 = 1;
+  hfdcan1.Init.DataTimeSeg1 = 13;
+  hfdcan1.Init.DataTimeSeg2 = 2;
   hfdcan1.Init.StdFiltersNbr = 28;
   hfdcan1.Init.ExtFiltersNbr = 0;
   hfdcan1.Init.TxFifoQueueMode = FDCAN_TX_FIFO_OPERATION;
@@ -274,15 +283,6 @@ static void MX_FDCAN1_Init(void)
     Error_Handler();
   }
 
-  TxHeader.Identifier = 0x123; // Modify this with your identifier
-  TxHeader.IdType = FDCAN_STANDARD_ID;
-  TxHeader.TxFrameType = FDCAN_DATA_FRAME;
-  TxHeader.DataLength = FDCAN_DLC_BYTES_8;
-  TxHeader.ErrorStateIndicator = FDCAN_ESI_ACTIVE;
-  TxHeader.BitRateSwitch = FDCAN_BRS_OFF;
-  TxHeader.FDFormat = FDCAN_CLASSIC_CAN;
-  TxHeader.TxEventFifoControl = FDCAN_NO_TX_EVENTS;
-  TxHeader.MessageMarker = 0;
   /* USER CODE END FDCAN1_Init 2 */
 }
 

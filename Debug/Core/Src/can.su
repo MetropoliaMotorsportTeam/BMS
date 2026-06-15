@@ -2,10 +2,10 @@
 ../Core/Src/can.c:36:6:read_IVT_U1	4	static
 ../Core/Src/can.c:45:6:read_IVT_U2	4	static
 ../Core/Src/can.c:54:6:read_IVT_Wh	4	static
-../Core/Src/can.c:63:6:HAL_FDCAN_RxFifo0Callback	24	static
-../Core/Src/can.c:109:6:CanSend	16	static
-../Core/Src/can.c:121:5:ReadCANBusMessage	24	static
-../Core/Src/can.c:144:6:Send_cell_data	48	static
-../Core/Src/can.c:174:6:Send_temp_data	64	static
-../Core/Src/can.c:304:6:Send_Soc	32	static
-../Core/Src/can.c:332:6:Send_Min	32	static
+../Core/Src/can.c:63:6:HAL_FDCAN_RxFifo0Callback	16	static
+../Core/Src/can.c:106:6:CanSend	24	static
+../Core/Src/can.c:126:5:ReadCANBusMessage	24	static
+../Core/Src/can.c:149:6:Send_cell_data	48	static
+../Core/Src/can.c:179:6:Send_temp_data	64	static
+../Core/Src/can.c:309:6:Send_Soc	32	static
+../Core/Src/can.c:337:6:Send_Min	32	static

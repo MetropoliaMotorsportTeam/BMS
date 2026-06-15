@@ -53,7 +53,7 @@ void operation_main(void)
   {
     // NOTE: remove once testing is done
     HAL_GPIO_TogglePin(Led_debug_GPIO_Port, Led_debug_Pin);
-    uint8_t data[8] = {100};
+    uint8_t data[8] = {100, 100, 100, 100, 100, 100, 100, 100};
     CanSend(data, 0x12);
 
     switch (status_data.mode)

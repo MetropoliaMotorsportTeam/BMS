@@ -3,9 +3,9 @@
 ../Core/Src/can.c:45:6:read_IVT_U2	1
 ../Core/Src/can.c:54:6:read_IVT_Wh	1
 ../Core/Src/can.c:63:6:HAL_FDCAN_RxFifo0Callback	11
-../Core/Src/can.c:109:6:CanSend	3
-../Core/Src/can.c:121:5:ReadCANBusMessage	4
-../Core/Src/can.c:144:6:Send_cell_data	3
-../Core/Src/can.c:174:6:Send_temp_data	2
-../Core/Src/can.c:304:6:Send_Soc	2
-../Core/Src/can.c:332:6:Send_Min	1
+../Core/Src/can.c:106:6:CanSend	3
+../Core/Src/can.c:126:5:ReadCANBusMessage	4
+../Core/Src/can.c:149:6:Send_cell_data	3
+../Core/Src/can.c:179:6:Send_temp_data	2
+../Core/Src/can.c:309:6:Send_Soc	2
+../Core/Src/can.c:337:6:Send_Min	1
