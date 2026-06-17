@@ -5,13 +5,8 @@
 status_data_t status_data = {0};
 limit_t limits = {0};
 
-uint8_t test_msg[8] = {0};
-
 void config_1()
 {
-  uint8_t data[8] = {0};
-  CanSend(data, 0x1);
-
   status_data.mode = 0;
   limits = (limit_t){.max_voltage = 42000,
                      .min_voltage = 25000,
@@ -29,8 +24,6 @@ void config_1()
 
 void config_2()
 {
-  uint8_t data[8] = {0};
-  CanSend(data, 0x2);
   status_data.mode = 1;
   limits = (limit_t){.max_voltage = 42000,
                      .min_voltage = 25000,
@@ -67,8 +60,6 @@ void config_3()
 
 void config_4()
 {
-  uint8_t data[8] = {0};
-  CanSend(data, 0x4);
   status_data.mode = 1;
   limits = (limit_t){.max_voltage = 42000,
                      .min_voltage = 25000,
@@ -93,7 +84,6 @@ void save_config(uint8_t config)
 
 void apply_config(uint8_t config)
 {
-  test_msg[0] = config;
   switch (config)
   {
   case 1:
@@ -111,5 +101,4 @@ void apply_config(uint8_t config)
   default:
     break;
   }
-  CanSend(test_msg, 0x12);
 }
