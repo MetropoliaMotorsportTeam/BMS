@@ -9,8 +9,7 @@ find last valid slot
 use that config
 */
 
-// TODO: make this function only erase whenever necessary
-void store_flash_memory(uint32_t mem_addr, uint64_t data)
+static void erase_flash_memory(uint32_t mem_addr)
 {
   if ((mem_addr % 8U) != 0U)
   {
@@ -30,6 +29,19 @@ void store_flash_memory(uint32_t mem_addr, uint64_t data)
   flash_erase.NbPages = 1;
 
   HAL_FLASHEx_Erase(&flash_erase, &page_error);
+
+  // lock for safety
+  __enable_irq();
+  HAL_FLASH_Lock();
+}
+
+// TODO: make this function only erase whenever necessary
+void store_flash_memory(uint32_t mem_addr, uint64_t data)
+{
+  __disable_irq();
+  HAL_FLASH_Unlock();
+
+  erase_flash_memory(mem_addr);
   HAL_FLASH_Program(FLASH_TYPEPROGRAM_DOUBLEWORD, mem_addr, data);
 
   __enable_irq();
