@@ -2,6 +2,14 @@
 #include "stm32g4xx_it.h"
 #include <stdint.h>
 
+// TODO:EEPROM emulation for storing config to save flash write cycles
+/*
+scan page
+find last valid slot
+use that config
+*/
+
+// TODO: make this function only erase whenever necessary
 void store_flash_memory(uint32_t mem_addr, uint64_t data)
 {
   if ((mem_addr % 8U) != 0U)
