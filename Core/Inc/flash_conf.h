@@ -1,6 +1,11 @@
 #ifndef FLASH_CONFIG_H
 #define FLASH_CONFIG_H
+/*
+  - Flash write file to store which configuration should be used
+  - Uses the last Page of FLash memory to store
+  - NOTE: Do not overwrite the last page
 
+*/
 #include "stm32g4xx_hal.h"
 #include <stdint.h>
 
