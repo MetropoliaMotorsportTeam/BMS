@@ -1,6 +1,7 @@
-../Core/Src/conf.c:10:6:config_1	1
-../Core/Src/conf.c:30:6:config_2	1
-../Core/Src/conf.c:49:6:config_3	1
-../Core/Src/conf.c:68:6:config_4	1
-../Core/Src/conf.c:87:6:save_config	2
-../Core/Src/conf.c:94:6:apply_config	5
+../Core/Src/conf.c:9:6:config_1	1
+../Core/Src/conf.c:26:6:config_2	1
+../Core/Src/conf.c:43:6:config_3	1
+../Core/Src/conf.c:60:6:config_4	1
+../Core/Src/conf.c:77:6:process_config	4
+../Core/Src/conf.c:91:6:apply_config	5
+../Core/Src/conf.c:112:6:load_config	3

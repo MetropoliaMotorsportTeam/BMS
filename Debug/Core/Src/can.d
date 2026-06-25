@@ -1,5 +1,4 @@
 Core/Src/can.o: ../Core/Src/can.c ../Core/Inc/can.h ../Core/Inc/conf.h \
- ../Core/Inc/flash_conf.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h \
  ../Core/Inc/stm32g4xx_hal_conf.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h \
@@ -35,7 +34,6 @@ Core/Src/can.o: ../Core/Src/can.c ../Core/Inc/can.h ../Core/Inc/conf.h \
  ../Core/Inc/conf.h ../Core/Inc/isoSpi.h ../Core/Inc/main.h
 ../Core/Inc/can.h:
 ../Core/Inc/conf.h:
-../Core/Inc/flash_conf.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h:
 ../Core/Inc/stm32g4xx_hal_conf.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h:

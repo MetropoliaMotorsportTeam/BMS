@@ -9,7 +9,6 @@
 
 #ifndef INC_CONF_H_
 #define INC_CONF_H_
-#include "flash_conf.h"
 #include "stdbool.h"
 #include "stm32g4xx_hal.h"
 #include <stdint.h>
@@ -151,12 +150,8 @@ void config_2(void);
 void config_3(void);
 void config_4(void);
 void apply_config(uint8_t);
-void save_config(uint8_t);
-static inline void load_config()
-{
-  uint8_t conf = read_flash_memory(CONFIG_FLASH_ADDR);
-  apply_config((conf > NUM_CONF || conf <= 0) ? DEFAULT_CONF : conf);
-}
+void process_config(uint8_t);
+void load_config(void);
 
 extern limit_t limits;
 extern status_data_t status_data;

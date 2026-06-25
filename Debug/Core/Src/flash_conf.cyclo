@@ -1,2 +1,8 @@
-../Core/Src/flash_conf.c:5:6:store_flash_memory	2
-../Core/Src/flash_conf.c:31:10:read_flash_memory	1
+../Core/Inc/flash_conf.h:24:23:valid_config	3
+../Core/Inc/flash_conf.h:30:24:make_config_record	1
+../Core/Inc/flash_conf.h:36:23:config_from_record	1
+../Core/Src/flash_conf.c:11:26:flash_erase_page	2
+../Core/Src/flash_conf.c:37:26:flash_store	3
+../Core/Src/flash_conf.c:61:19:save_config	6
+../Core/Src/flash_conf.c:82:26:get_empty_conf_addr	3
+../Core/Src/flash_conf.c:97:18:get_curr_conf	4

@@ -1,6 +1,5 @@
 Core/Src/LTC681x.o: ../Core/Src/LTC681x.c ../Core/Inc/LTC681x.h \
- ../Core/Inc/conf.h ../Core/Inc/flash_conf.h \
- ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h \
+ ../Core/Inc/conf.h ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h \
  ../Core/Inc/stm32g4xx_hal_conf.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h \
@@ -35,7 +34,6 @@ Core/Src/LTC681x.o: ../Core/Src/LTC681x.c ../Core/Inc/LTC681x.h \
  ../Core/Inc/conf.h ../Core/Inc/isoSpi.h
 ../Core/Inc/LTC681x.h:
 ../Core/Inc/conf.h:
-../Core/Inc/flash_conf.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h:
 ../Core/Inc/stm32g4xx_hal_conf.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h:

@@ -1,6 +1,7 @@
 #include "conf.h"
 #include "can.h"
 #include "flash_conf.h"
+#include "main.h"
 
 status_data_t status_data = {0};
 limit_t limits = {0};
@@ -41,8 +42,6 @@ void config_2()
 
 void config_3()
 {
-  uint8_t data[8] = {0};
-  CanSend(data, 0x3);
   status_data.mode = 1;
   limits = (limit_t){.max_voltage = 42000,
                      .min_voltage = 25000,
@@ -75,11 +74,18 @@ void config_4()
                      .limp_min_voltage = 34000};
 }
 
-void save_config(uint8_t config)
+void process_config(uint8_t config)
 {
-  uint8_t conf = (config > NUM_CONF ? DEFAULT_CONF : config);
-  store_flash_memory(CONFIG_FLASH_ADDR, conf);
-  apply_config(config);
+  uint8_t conf = ((config < 1 || config > NUM_CONF) ? DEFAULT_CONF : config);
+  if (save_config(conf) != HAL_OK)
+    Error_Handler();
+
+  apply_config(conf);
+
+  // NOTE: remove after testing
+  uint8_t data[8] = {0};
+  CanSend(data, conf);
+  CanSend(data, 0x12);
 }
 
 void apply_config(uint8_t config)
@@ -101,4 +107,11 @@ void apply_config(uint8_t config)
   default:
     break;
   }
+}
+
+void load_config()
+{
+  uint8_t config = get_curr_conf();
+  uint8_t conf = ((config < 1 || config > NUM_CONF) ? DEFAULT_CONF : config);
+  apply_config(conf);
 }

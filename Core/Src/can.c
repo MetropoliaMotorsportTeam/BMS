@@ -87,7 +87,7 @@ void HAL_FDCAN_RxFifo0Callback(FDCAN_HandleTypeDef* hfdcan, uint32_t RxFifo0ITs)
         read_IVT_Wh();
         break;
       case CAN_CHANGE_CONFIG:
-        save_config(CAN_RxData[0]);
+        process_config(CAN_RxData[0]);
         break;
 
       default:
