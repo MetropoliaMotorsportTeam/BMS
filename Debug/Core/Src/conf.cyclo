@@ -3,5 +3,5 @@
 ../Core/Src/conf.c:43:6:config_3	1
 ../Core/Src/conf.c:60:6:config_4	1
 ../Core/Src/conf.c:77:6:process_config	4
-../Core/Src/conf.c:91:6:apply_config	5
-../Core/Src/conf.c:112:6:load_config	3
+../Core/Src/conf.c:86:6:apply_config	5
+../Core/Src/conf.c:107:6:load_config	3

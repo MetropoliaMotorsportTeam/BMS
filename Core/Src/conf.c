@@ -81,11 +81,6 @@ void process_config(uint8_t config)
     Error_Handler();
 
   apply_config(conf);
-
-  // NOTE: remove after testing
-  uint8_t data[8] = {0};
-  CanSend(data, conf);
-  CanSend(data, 0x12);
 }
 
 void apply_config(uint8_t config)

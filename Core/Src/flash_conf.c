@@ -1,4 +1,5 @@
 #include "flash_conf.h"
+#include "can.h"
 #include "conf.h"
 #include "main.h"
 #include "stm32g4xx_it.h"
@@ -29,8 +30,8 @@ static HAL_StatusTypeDef flash_erase_page(uint32_t mem_addr)
 
   HAL_StatusTypeDef status = HAL_FLASHEx_Erase(&flash_erase, &page_error);
 
-  __enable_irq();
   HAL_FLASH_Lock();
+  __enable_irq();
   return status;
 }
 
@@ -52,8 +53,8 @@ static HAL_StatusTypeDef flash_store(uint32_t addr, uint8_t config)
 
   HAL_StatusTypeDef status = HAL_FLASH_Program(FLASH_TYPEPROGRAM_DOUBLEWORD, addr, record);
 
-  __enable_irq();
   HAL_FLASH_Lock();
+  __enable_irq();
 
   return status;
 }
@@ -73,8 +74,7 @@ HAL_StatusTypeDef save_config(uint8_t config)
     if (flash_erase_page(CONFIG_FLASH_ADDR) != HAL_OK)
       return HAL_ERROR;
 
-    if (flash_store(CONFIG_FLASH_ADDR, config) != HAL_OK)
-      return HAL_ERROR;
+    addr = CONFIG_FLASH_ADDR;
   }
   return flash_store(addr, config);
 }
