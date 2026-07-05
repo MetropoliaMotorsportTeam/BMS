@@ -76,7 +76,7 @@ void config_4()
 
 void process_config(uint8_t config)
 {
-  uint8_t conf = ((config < 1 || config > NUM_CONF) ? DEFAULT_CONF : config);
+  uint8_t conf = (valid_config(config) ? config : DEFAULT_CONF);
   if (save_config(conf) != HAL_OK)
     Error_Handler();
 
@@ -107,6 +107,6 @@ void apply_config(uint8_t config)
 void load_config()
 {
   uint8_t config = get_curr_conf();
-  uint8_t conf = ((config < 1 || config > NUM_CONF) ? DEFAULT_CONF : config);
+  uint8_t conf = (valid_config(config) ? config : DEFAULT_CONF);
   apply_config(conf);
 }
