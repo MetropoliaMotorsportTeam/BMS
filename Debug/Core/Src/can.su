@@ -6,6 +6,6 @@
 ../Core/Src/can.c:106:6:CanSend	16	static
 ../Core/Src/can.c:117:5:ReadCANBusMessage	24	static
 ../Core/Src/can.c:142:6:Send_cell_data	48	static
-../Core/Src/can.c:170:6:Send_temp_data	88	static
+../Core/Src/can.c:170:6:Send_temp_data	64	static
 ../Core/Src/can.c:299:6:Send_Soc	32	static
 ../Core/Src/can.c:327:6:Send_Min	32	static
