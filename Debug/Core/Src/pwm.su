@@ -1,2 +1,0 @@
-../Core/Src/pwm.c:25:6:fan_control	16	static
-../Core/Src/pwm.c:32:6:set_fan_duty_cycle	16	static
