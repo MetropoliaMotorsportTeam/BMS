@@ -55,10 +55,12 @@ void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
 void Error_Handler(void);
 
 /* USER CODE BEGIN EFP */
-
+extern ADC_HandleTypeDef hadc1;
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define Ambient_temp_Pin GPIO_PIN_0
+#define Ambient_temp_GPIO_Port GPIOA
 #define USART2_TX_Pin GPIO_PIN_2
 #define USART2_TX_GPIO_Port GPIOA
 #define USART2_RX_Pin GPIO_PIN_3

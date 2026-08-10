@@ -159,7 +159,7 @@
   *         the configuration information for the specified GPIO peripheral.
   * @retval None
   */
-void HAL_GPIO_Init(GPIO_TypeDef  *GPIOx, GPIO_InitTypeDef *GPIO_Init)
+void HAL_GPIO_Init(GPIO_TypeDef *GPIOx, GPIO_InitTypeDef const *GPIO_Init)
 {
   uint32_t position = 0x00U;
   uint32_t iocurrent;
@@ -198,7 +198,8 @@ void HAL_GPIO_Init(GPIO_TypeDef  *GPIOx, GPIO_InitTypeDef *GPIO_Init)
         GPIOx->OTYPER = temp;
       }
 
-      if ((GPIO_Init->Mode & GPIO_MODE) != MODE_ANALOG)
+      if (((GPIO_Init->Mode & GPIO_MODE) != MODE_ANALOG) ||
+          (((GPIO_Init->Mode & GPIO_MODE) == MODE_ANALOG) && (GPIO_Init->Pull != GPIO_PULLUP)))
       {
         /* Check the Pull parameter */
         assert_param(IS_GPIO_PULL(GPIO_Init->Pull));
@@ -370,7 +371,7 @@ void HAL_GPIO_DeInit(GPIO_TypeDef  *GPIOx, uint32_t GPIO_Pin)
   *         This parameter can be any combination of GPIO_PIN_x where x can be (0..15).
   * @retval The input port pin value.
   */
-GPIO_PinState HAL_GPIO_ReadPin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin)
+GPIO_PinState HAL_GPIO_ReadPin(GPIO_TypeDef const *GPIOx, uint16_t GPIO_Pin)
 {
   GPIO_PinState bitstatus;
 
@@ -449,7 +450,7 @@ void HAL_GPIO_TogglePin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin)
   *         until the next reset.
   * @param  GPIOx where x can be (A..G) to select the GPIO peripheral for STM32G4xx family
   * @param  GPIO_Pin specifies the port bits to be locked.
-  *         This parameter can be any combination of GPIO_Pin_x where x can be (0..15).
+  *         This parameter can be any combination of GPIO_PIN_x where x can be (0..15).
   * @retval None
   */
 HAL_StatusTypeDef HAL_GPIO_LockPin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin)

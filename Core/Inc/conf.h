@@ -19,7 +19,7 @@
 #define CS_PIN_TYPE GPIOA
 
 #define CELL_NUM 12	// Number of cells in one stack
-#define IC_NUM 2 // Length of a daisy chain
+#define IC_NUM 12 // Length of a daisy chain
 #define GPIO_NUM 6 //GPIO + Vref
 #define READ_AUX_TEMP_REG 0 // Set to 1 to enable extra temp channels (indices 6-9), requires GPIO_NUM 12
 
@@ -30,6 +30,8 @@
 #define FREQUENCY 1
 
 #define ACCU_Wh 6600
+
+#define IVT_LOSS_GRACE_MS 5000 // Time IVT can be missing while AMS was OK before AIRs are opened
 
 typedef struct cell_data_t
 {
@@ -80,6 +82,8 @@ typedef struct status_data_t
 	int32_t IVT_voltage;
 	int16_t delta;
 
+	int8_t ambient_temp;
+
 	int16_t min_temp;
 	int16_t max_temp;
 	uint8_t min_temp_id;
@@ -118,6 +122,9 @@ typedef struct status_data_t
 	float pec_error_average;
 	uint32_t limping;
 	uint8_t recieved_IVT;
+	uint32_t last_ivt_tick;
+
+	uint8_t ams_ok_error_code;
 }status_data_t;
 
 //////////////////////////////////////////////////////////////////////
@@ -138,8 +145,8 @@ typedef struct status_data_t
 /*!
 	debug functionality enable/disable
  */
-#define IVT							0
-#define CAN_ENABLED					0
+#define IVT							1
+#define CAN_ENABLED					1
 #define ERROR_COUNT_LIMIT			2 //0 = shut down on first error
 
 #endif /* INC_CONF_H_ */

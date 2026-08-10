@@ -103,7 +103,29 @@ void HAL_FDCAN_RxFifo0Callback(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo0ITs)
 }
 
 
+uint8_t CheckCanError(void){
+	FDCAN_ProtocolStatusTypeDef protocolStatus;
+	HAL_FDCAN_GetProtocolStatus(&hfdcan1, &protocolStatus);
+
+	if(protocolStatus.BusOff){
+		canSendErrorFlag = ERR_CANOFFLINE;
+
+		/* Bus_Off recovery: request init, then leave init so hardware
+		 * restarts bus integration (waits for 129 recessive bits). */
+		HAL_FDCAN_Stop(&hfdcan1);
+		HAL_FDCAN_Start(&hfdcan1);
+		HAL_FDCAN_ActivateNotification(&hfdcan1, FDCAN_IT_RX_FIFO0_NEW_MESSAGE, 0);
+
+		return 1;
+	}
+
+	canSendErrorFlag = 0;
+	return 0;
+}
+
 void CanSend(uint8_t *TxData, uint32_t identifier ){
+
+	CheckCanError();
 
 	TxHeader.Identifier = identifier;
 

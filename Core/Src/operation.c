@@ -6,6 +6,7 @@
  */
 
 #include "operation.h"
+#include "main.h"
 #include "conf.h"
 #include "temp_calc.h"
 #include "LTC681x.h"
@@ -15,6 +16,7 @@
 #define RETEST_YES	1
 #define RETEST_NO	0
 
+extern ADC_HandleTypeDef hadc1;
 
 uint8_t start_ivt[] = {0x34, 0x01, 0x1, 0x0, 0x0, 0x0, 0x0, 0x0};
 /*
@@ -32,7 +34,7 @@ status_data_t status_data;
 
 limit_t limits  = {
 	.max_voltage = 42000,
-	.min_voltage = 25000,
+	.min_voltage = 30000,
 	.max_charge_temp = 4400,
 	.max_temp = 59,
 	.min_temp = 0,
@@ -61,7 +63,7 @@ void operation_main(void){
 		status_data.recieved_IVT = 0;
 
 
-		status_data.mode = 1; // Operation mode. 0 - normal, 1 - balancing
+		status_data.mode = 0; // Operation mode. 0 - normal, 1 - balancing
 
 		//Set Fans on
 		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, SET);
@@ -159,13 +161,31 @@ void open_PRE(void){
 
 int AMS_OK(status_data_t *status_data, limit_t *limit){
 	if(status_data->min_voltage > limit->min_voltage && status_data->max_voltage < limit->max_voltage){
+
 		if(status_data->min_temp > limit->min_temp && status_data->max_temp < limit->max_temp){
+			status_data->ams_ok_error_code = 2;
 			if(status_data->recieved_IVT){
+				status_data->last_ivt_tick = HAL_GetTick();
 				close_AIR();
 				status_data->recieved_IVT = 0;
 				return 0;
 			}
+			else if(status_data->air_s && (HAL_GetTick() - status_data->last_ivt_tick) < IVT_LOSS_GRACE_MS){
+				/* AMS was OK and AIRs closed; tolerate a brief IVT dropout
+				 * before opening AIRs, so a momentary IVT/CAN glitch doesn't
+				 * trip the pack open. */
+				return 0;
+			}
+			else{
+				status_data->ams_ok_error_code = 3;
+			}
 		}
+		else{
+			status_data->ams_ok_error_code = 2;
+		}
+	}
+	else{
+		status_data->ams_ok_error_code = 1;
 	}
 	open_AIR();
 	return 1;
@@ -233,6 +253,7 @@ void core_routine(int32_t retest){
 	get_minmax_temperature(IC_NUM, temp_data, &status_data);
 	calc_sum_of_cells(IC_NUM, cell_data, &status_data);
 	AMS_OK(&status_data, &limits);
+	get_ambient_temp();
 	set_fan_duty_cycle(&status_data);
 
 #if IVT
@@ -438,5 +459,12 @@ void test_limp(status_data_t *status_data, limit_t *limit)
 	else{
 		status_data->limping = 0;
 	}
+}
 
+void get_ambient_temp(){
+
+	HAL_ADC_Start(&hadc1);
+	HAL_ADC_PollForConversion(&hadc1, 10);
+	uint32_t voltage = HAL_ADC_GetValue(&hadc1);
+	status_data.ambient_temp = temp_ambient_calc(voltage);
 }
