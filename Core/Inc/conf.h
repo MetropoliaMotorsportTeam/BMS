@@ -31,7 +31,7 @@
 
 #define ACCU_Wh 6600
 
-#define IVT_LOSS_GRACE_MS 5000 // Time IVT can be missing while AMS was OK before AIRs are opened
+#define IVT_LOSS_GRACE_MS 100 // Time IVT can be missing while AMS was OK before AIRs are opened
 
 typedef struct cell_data_t
 {
