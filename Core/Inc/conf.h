@@ -9,23 +9,24 @@
 
 #ifndef INC_CONF_H_
 #define INC_CONF_H_
-#include <stdint.h>
 #include "stdbool.h"
 #include "stm32g4xx_hal.h"
+#include <stdint.h>
 
-#define BATTERY_CAPACITY 13000 //13Ah
+#define BATTERY_CAPACITY 13000 // 13Ah
 
 #define CS_PIN 4
 #define CS_PIN_TYPE GPIOA
 
-#define CELL_NUM 12	// Number of cells in one stack
-#define IC_NUM 12 // Length of a daisy chain
-#define GPIO_NUM 6 //GPIO + Vref
-#define READ_AUX_TEMP_REG 0 // Set to 1 to enable extra temp channels (indices 6-9), requires GPIO_NUM 12
+#define CELL_NUM 12 // Number of cells in one stack
+#define IC_NUM 12   // Length of a daisy chain
+#define GPIO_NUM 6  // GPIO + Vref
+#define READ_AUX_TEMP_REG                                                                          \
+  0 // Set to 1 to enable extra temp channels (indices 6-9), requires GPIO_NUM 12
 
 #define SPI_TIMEOUT 15000
 
-#define NUMB_REASON_CODES	13
+#define NUMB_REASON_CODES 13
 
 #define FREQUENCY 1
 
@@ -35,106 +36,104 @@
 
 typedef struct cell_data_t
 {
-	uint16_t voltage;
-}cell_data_t;
+  uint16_t voltage;
+} cell_data_t;
 
 typedef struct temp_data_t
 {
-	uint16_t raw;
-	int16_t temp;
-}temp_data_t;
-
-
+  uint16_t raw;
+  int16_t temp;
+} temp_data_t;
 
 /*!
-	Structure containing limits
+  Structure containing limits
 */
 typedef struct limit_t
 {
-	uint16_t max_voltage;
-	uint16_t min_voltage;
-	int16_t max_temp;
-	int16_t max_charge_temp;
-	int16_t min_temp;
-	int32_t current;
-	int32_t power;
-	uint16_t tolerance;
-	float max_current;
-	float accu_min_voltage;
-	float precharge_min_start_voltage;
-	float precharge_max_end_voltage;
-	uint16_t limp_min_voltage;
-}limit_t;
+  uint16_t max_voltage;
+  uint16_t min_voltage;
+  int16_t max_temp;
+  int16_t max_charge_temp;
+  int16_t min_temp;
+  int32_t current;
+  int32_t power;
+  uint16_t tolerance;
+  float max_current;
+  float accu_min_voltage;
+  float precharge_min_start_voltage;
+  float precharge_max_end_voltage;
+  uint16_t limp_min_voltage;
+} limit_t;
 
-
-enum Accu_State{
-	INIT,
-	HvRUNNING,
-	ERROR
-};
+typedef enum Accu_State
+{
+  INIT,
+  HvRUNNING,
+  ACCU_ERROR,
+} Accu_State;
 
 /*!
-	Main status data structure
+  Main status data structure
 */
 typedef struct status_data_t
 {
 
-	Accu_State accu_state;
-	int32_t uptime;
-	int8_t mode;
-	float soc;
-	float soc_pre;
-	int32_t current;
-	int32_t power;
-	int32_t IVT_voltage;
-	int16_t delta;
-	int16_t init_energy_Wh;
-	uint32_t remaining_energy_Wh;
+  Accu_State accu_state;
+  int32_t uptime;
+  int8_t mode;
+  float soc;
+  float soc_pre;
+  int32_t current;
+  int32_t power;
+  int32_t IVT_voltage;
+  int16_t delta;
+  int16_t init_energy_Wh;
+  uint32_t remaining_energy_Wh;
 
-	int8_t ambient_temp;
+  int8_t ambient_temp;
 
-	int16_t min_temp;
-	int16_t max_temp;
-	uint8_t min_temp_id;
-	uint8_t max_temp_id;
-	uint16_t min_voltage;
-	uint16_t max_voltage;
-	uint8_t min_voltage_id;
-	uint8_t max_voltage_id;
+  int16_t min_temp;
+  int16_t max_temp;
+  uint8_t min_temp_id;
+  uint8_t max_temp_id;
+  uint16_t min_voltage;
+  uint16_t max_voltage;
+  uint8_t min_voltage_id;
+  uint8_t max_voltage_id;
 
-	float sum_of_cells;
+  float sum_of_cells;
 
-	bool air_s;
-	bool pre_s;
-	bool air_pre;
-	bool air_p;
-	bool air_m;
+  bool air_s;
+  bool pre_s;
+  bool air_pre;
+  bool air_p;
+  bool air_m;
 
-	uint8_t opmode;
+  uint8_t opmode;
 
-	bool safe_state_executed;
-	uint8_t reason_code;
+  bool safe_state_executed;
+  uint8_t reason_code;
 
-	int32_t IVT_U1;
-	float IVT_U1_f;
-	int32_t IVT_U2;
-	float IVT_U2_f;
-	int32_t IVT_Wh;
-	float IVT_Wh_f;
-	int32_t IVT_I;
-	float IVT_I_f;
+  int32_t IVT_U1;
+  float IVT_U1_f;
+  int32_t IVT_U2;
+  float IVT_U2_f;
+  int32_t IVT_Wh;
+  float IVT_Wh_f;
+  int32_t IVT_I;
+  float IVT_I_f;
 
-	float pre_percentage;
+  float pre_percentage;
 
-	uint32_t pec_error_counter;
-	uint32_t pec_error_counter_last;
-	float pec_error_average;
-	uint32_t limping;
-	uint8_t recieved_IVT;
-	uint32_t last_ivt_tick;
+  uint32_t pec_error_counter;
+  uint32_t pec_error_counter_last;
+  float pec_error_average;
+  uint32_t limping;
+  uint8_t recieved_IVT;
+  uint32_t last_ivt_tick;
 
-	uint8_t ams_ok_error_code;
-}status_data_t;
+  uint8_t ams_ok_error_code;
+} status_data_t;
 
 //////////////////////////////////////////////////////////////////////
 /*CAN bus IDs
@@ -152,10 +151,10 @@ typedef struct status_data_t
 
 /////////////////////////////////////////////////////////////////////
 /*!
-	debug functionality enable/disable
+  debug functionality enable/disable
  */
-#define IVT							1
-#define CAN_ENABLED					1
-#define ERROR_COUNT_LIMIT			2 //0 = shut down on first error
+#define IVT 1
+#define CAN_ENABLED 1
+#define ERROR_COUNT_LIMIT 2 // 0 = shut down on first error
 
 #endif /* INC_CONF_H_ */
