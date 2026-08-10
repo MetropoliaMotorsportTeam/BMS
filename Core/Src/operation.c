@@ -56,6 +56,8 @@ void operation_main(void){
 	initialize();
 	init_slave_cfg();
 
+		status_data.accu_state = INIT;
+
 		status_data.pec_error_counter = 0;
 		status_data.pec_error_counter_last = 0;
 
@@ -71,6 +73,9 @@ void operation_main(void){
 
 	while(1){
 
+		if(status_data.accu_state == INIT){ // estimate battery capacity during non active HV
+			status_data.init_energy_Wh = (uint32_t)(status_data.sum_of_cells * BATTERY_CAPACITY / 1000);
+		}
 
 		switch (status_data.mode){
 			case 0:
@@ -187,6 +192,7 @@ int AMS_OK(status_data_t *status_data, limit_t *limit){
 	else{
 		status_data->ams_ok_error_code = 1;
 	}
+	status_data->accu_state = ERROR;
 	open_AIR();
 	return 1;
 }
@@ -297,6 +303,7 @@ void precharge_compare(void)
 					HAL_Delay(100);
 				}
 			}
+			status_data.accu_state = HvRUNNING;
 			close_PRE();
 		}
 		else

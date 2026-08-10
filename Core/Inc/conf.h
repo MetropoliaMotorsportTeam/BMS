@@ -67,12 +67,19 @@ typedef struct limit_t
 }limit_t;
 
 
+enum Accu_State{
+	INIT,
+	HvRUNNING,
+	ERROR
+};
+
 /*!
 	Main status data structure
 */
 typedef struct status_data_t
 {
 
+	Accu_State accu_state;
 	int32_t uptime;
 	int8_t mode;
 	float soc;
@@ -81,6 +88,8 @@ typedef struct status_data_t
 	int32_t power;
 	int32_t IVT_voltage;
 	int16_t delta;
+	int16_t init_energy_Wh;
+	uint32_t remaining_energy_Wh;
 
 	int8_t ambient_temp;
 
